@@ -25,38 +25,11 @@ require_once 'inc/subSectionFromMain.php';
   </section>
 
   <section class="text-white bg-black">
-    <div class="section-container py-5">
-      <h4 class="fw-bolder mb-4">ما هي رؤية شركة Coding arabic</h4>
-      <p class="m-0">
-        رؤيتنا هي أن نكون الشركة الرائدة في مجال بيع الأحذية في مصر، وأن
-        نوفر لعملائنا أفضل الأحذية ذات الجودة العالية والأسعار المعقولة.
-      </p>
-      <p class="m-0">
-        لدينا تشكيلة واسعة من الأحذية، بما في ذلك الأحذية الرياضية، والأحذية
-        الرسمية، والأحذية الكاجوال، والأحذية الطبية، وأكثر من ذلك. نحرص على
-        أن تكون جميع أحذيتنا مصنوعة من مواد عالية الجودة، وأن تكون مريحة
-        وأنيقة في نفس الوقت.
-      </p>
-    </div>
+
   </section>
 
   <section class="section-container d-flex align-items-center py-5">
-    <div class="w-50">
-      <h4 class="fw-bolder mb-4">هدف شركة Coding arabic</h4>
-      <p class="m-0">
-        نحن نؤمن بأن الأحذية هي جزء مهم من شخصية الفرد، لذلك هدفنا هو أن
-        نوفر لعملائنا أفضل تجربة تسوق ممكنة، وأن نجعل من عملية شراء الأحذية
-        تجربة ممتعة وسهلة.
-      </p>
-      <p>
-        ونسعى جاهدين لتحقيق رؤيتنا وهدفنا من خلال تقديم مجموعة واسعة من
-        الأحذية ذات الجودة العالية والأسعار المعقولة، وتوفير خدمة عملاء
-        ممتازة.
-      </p>
-    </div>
-    <div class="about__img text-end w-50">
-      <img class="w-100" src="assets/images/about-2.png" alt="" />
-    </div>
+
   </section>
 
   <section class="section-container py-5">
