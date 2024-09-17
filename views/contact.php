@@ -58,6 +58,9 @@ require_once 'inc/subSectionFromMain.php';
     </div>
   </section>
 
+    <section>
+      <form action=""></form>
+    </section>
   <section class="section-container contact d-md-flex align-items-center mb-3">
     <div class="contact__side w-50">
       <h4 class="mb-3">يسعدنا تواصلك معنا في أى وقت</h4>
