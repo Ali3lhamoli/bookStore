@@ -7,6 +7,8 @@ DatabaseConnection::getInstance()->selectDatabase();
 
 
 $config = require_once 'config.php';
+require_once 'core/functions.php';
+
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
         case 'about':

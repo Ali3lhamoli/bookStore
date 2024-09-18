@@ -11,7 +11,7 @@ class DatabaseConnection
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $dbname = "BookStore";
+    private $dbname = "bookstore";
 
     // Private constructor to prevent multiple instances
     private function __construct()
@@ -22,6 +22,9 @@ class DatabaseConnection
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
+
+        // Select the database after creating the connection
+        $this->selectDatabase();
     }
 
     // Get the single instance of the class
