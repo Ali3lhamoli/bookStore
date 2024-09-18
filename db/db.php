@@ -35,7 +35,7 @@ $tables = [
         author VARCHAR(255) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         stock INT NOT NULL,
-        description TEXT
+        description TEXT,
     )",
 
     // Orders table
@@ -138,15 +138,21 @@ $tables = [
         email VARCHAR(50),
         title VARCHAR(50)
     )",
+
+    // homeslider table
+    "CREATE TABLE IF NOT EXISTS `homeslider` (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        `image` VARCHAR(250)
+    )"
 ];
 
 
 // Loop through and execute each table creation query
 foreach ($tables as $table_sql) {
     if (mysqli_query($db, $table_sql)) {
-        echo "Table created successfully\n";
+        echo "Table created successfully <br>";
     } else {
-        echo "Error creating table: " . mysqli_error($db) . "\n";
+        echo "Error creating table: " . mysqli_error($db) . "<br>";
     }
 }
 

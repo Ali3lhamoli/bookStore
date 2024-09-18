@@ -13,7 +13,10 @@ class DatabaseCrud
     public function create($table_name, $data)
     {
         $columns = implode(", ", array_keys($data));
-        $values = implode("', '", array_values($data));
+        $escaped_values = array_map(function ($value) {
+            return mysqli_real_escape_string($this->connection, $value);
+        }, array_values($data));
+        $values = implode("', '", $escaped_values);
         $sql = "INSERT INTO $table_name ($columns) VALUES ('$values')";
 
         if (mysqli_query($this->connection, $sql)) {
@@ -27,7 +30,7 @@ class DatabaseCrud
     public function read($table_name, $where = "", $fields = "*")
     {
         $sql = "SELECT $fields FROM $table_name";
-        if ($where) {
+        if (!empty($where)) {
             $sql .= " WHERE $where";
         }
 
@@ -43,9 +46,14 @@ class DatabaseCrud
     // UPDATE: Update data in the table
     public function update($table_name, $data, $where)
     {
+        if (empty($where)) {
+            return "Error: A WHERE condition is required to update.";
+        }
+
         $updateValues = "";
         foreach ($data as $column => $value) {
-            $updateValues .= "$column = '$value', ";
+            $escaped_value = mysqli_real_escape_string($this->connection, $value);
+            $updateValues .= "$column = '$escaped_value', ";
         }
         $updateValues = rtrim($updateValues, ', ');
 
@@ -61,6 +69,10 @@ class DatabaseCrud
     // DELETE: Delete data from the table
     public function delete($table_name, $where)
     {
+        if (empty($where)) {
+            return "Error: A WHERE condition is required to delete.";
+        }
+
         $sql = "DELETE FROM $table_name WHERE $where";
 
         if (mysqli_query($this->connection, $sql)) {
@@ -69,4 +81,21 @@ class DatabaseCrud
             return "Error: " . mysqli_error($this->connection);
         }
     }
+
+    // ALTER TABLE: Add columns to a table dynamically
+    public function alterTableAddColumn($table_name, $columns)
+    {
+        $columnDefinitions = [];
+        foreach ($columns as $column_name => $column_definition) {
+            $columnDefinitions[] = "ADD $column_name $column_definition";
+        }
+        $sql = "ALTER TABLE $table_name " . implode(", ", $columnDefinitions);
+
+        if (mysqli_query($this->connection, $sql)) {
+            return "Columns added successfully to $table_name.";
+        } else {
+            return "Error adding columns: " . mysqli_error($this->connection);
+        }
+    }
+
 }

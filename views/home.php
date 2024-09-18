@@ -1,8 +1,12 @@
 <?php
-
-
+require_once "classes/DatabaseConnection.php";
+require_once 'classes/DatabaseCrud.php';
 require_once 'inc/header.php';
 require_once 'inc/nav.php';
+
+$img_path = $config['base_url'] . "assets/images/Slider/";
+$crud = new DatabaseCrud();
+$sliders = $crud->read("homeslider");
 
 ?>
 <!-- Page Content Start -->
@@ -10,15 +14,11 @@ require_once 'inc/nav.php';
   <!-- Hero Section Start -->
   <section class="section-container hero">
     <div class="owl-carousel hero__carousel owl-theme">
-      <div class="hero__item">
-        <img class="hero__img" src="assets/images/carousel-2.png" alt="">
-      </div>
-      <div class="hero__item">
-        <img class="hero__img" src="assets/images/carousel-2.png" alt="">
-      </div>
-      <div class="hero__item">
-        <img class="hero__img" src="assets/images/carousel-2.png" alt="">
-      </div>
+      <?php foreach ($sliders as $slider): ?>
+        <div class="hero__item">
+          <img class="hero__img" src="<?= $img_path . $slider['image']; ?>" alt="">
+        </div>
+      <?php endforeach; ?>
     </div>
   </section>
   <!-- Hero Section End -->
