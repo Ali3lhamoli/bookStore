@@ -28,17 +28,17 @@ $crud = new DatabaseCrud();
 
 // insert data into books table
 
-$insertData = [
-    `title` => 'Modern Full-Stack Development',
-    `author` => 'Frank Zammetti',
-    `price` => 5000,
-    `stock` => 30,
-    `times_of_buying` => 0,
-    `description` => '',
-    `number_of_pages` => 373,
-    `discount` => 0,
-    `image` => 'product-1.webp'
-];
-$insertId = $crud->create('books', $insertData);
+// $insertData = [
+//     'title' => 'C# 10 in a Nutshell',
+//     'author' => 'Frank Zammetti',
+//     'price' => 5000.00,
+//     'stock' => 30,
+//     'purchases' => 20,
+//     'pages' => 373,
+//     'discount_price' => 200.00,
+//     'image' => 'product-2.webp'
+// ];
 
-echo "New record created successfully in books table. $insertId <br>";
+// $insertId = $crud->create('books', $insertData);
+
+// echo "New record created successfully in books table. $insertId <br>";

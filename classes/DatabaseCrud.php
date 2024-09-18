@@ -1,74 +1,121 @@
 <?php
 
-class DatabaseConnection
+class DatabaseCrud
 {
-    // Hold single instance of class
-    private static $instance;
-
-    // Store connection
     private $connection;
 
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $dbname = "bookstore";
-
-    // Private constructor to prevent multiple instances
-    private function __construct()
+    public function __construct()
     {
-        // Establish connection without selecting a database first
-        $this->connection = new mysqli($this->host, $this->username, $this->password);
+        $this->connection = DatabaseConnection::getInstance()->getConnection();
+    }
 
-        if ($this->connection->connect_error) {
-            die("Connection failed: " . $this->connection->connect_error);
+    // CREATE: Insert data into the table (escaping values for safety)
+    public function create($table_name, $data)
+    {
+        $columns = implode(", ", array_keys($data));
+        $escaped_values = array_map(function ($value) {
+            return mysqli_real_escape_string($this->connection, $value);
+        }, array_values($data));
+        $values = implode("', '", $escaped_values);
+        $sql = "INSERT INTO $table_name ($columns) VALUES ('$values')";
+
+        if (mysqli_query($this->connection, $sql)) {
+            return mysqli_insert_id($this->connection);
+        } else {
+            return "Error: " . mysqli_error($this->connection);
         }
     }
 
-    // Get the single instance of the class
-    public static function getInstance()
+    // READ: Fetch data from the table, with optional ORDER BY clause
+    public function read($table_name, $where = "", $fields = "*", $orderBy = "")
     {
-        if (self::$instance == null) {
-            self::$instance = new DatabaseConnection();
+        $sql = "SELECT $fields FROM $table_name";
+
+        // If WHERE condition is provided, append it
+        if (!empty($where)) {
+            $sql .= " WHERE $where";
         }
 
-        return self::$instance;
-    }
+        // Append the ORDER BY clause or any additional SQL if provided
+        if (!empty($orderBy)) {
+            $sql .= " " . $orderBy;
+        }
 
-    // Get the active connection
-    public function getConnection()
-    {
-        return $this->connection;
-    }
+        $result = mysqli_query($this->connection, $sql);
 
-    // Select the database after creating it
-    public function selectDatabase()
-    {
-        if (!$this->connection->select_db($this->dbname)) {
-            die("Database selection failed: " . $this->connection->error);
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            return [];
         }
     }
 
-    // Get the database name
-    public function getDbName()
+    // READ with LIMIT: Fetch a limited number of rows from the table
+    public function readLIMIT($table_name, $limit = 4)
     {
-        return $this->dbname;
+        $sql = "SELECT * FROM $table_name LIMIT 0, $limit";
+
+        $result = mysqli_query($this->connection, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
     }
 
-    // Close the connection
-    public function closeConnection()
+    // UPDATE: Update data in the table (escaping values for safety)
+    public function update($table_name, $data, $where)
     {
-        $this->connection->close();
+        if (empty($where)) {
+            return "Error: A WHERE condition is required to update.";
+        }
+
+        $updateValues = "";
+        foreach ($data as $column => $value) {
+            $escaped_value = mysqli_real_escape_string($this->connection, $value);
+            $updateValues .= "$column = '$escaped_value', ";
+        }
+        $updateValues = rtrim($updateValues, ', ');
+
+        $sql = "UPDATE $table_name SET $updateValues WHERE $where";
+
+        if (mysqli_query($this->connection, $sql)) {
+            return mysqli_affected_rows($this->connection);
+        } else {
+            return "Error: " . mysqli_error($this->connection);
+        }
     }
 
-    // Prevent cloning
-    public function __clone()
+    // DELETE: Delete data from the table
+    public function delete($table_name, $where)
     {
-        trigger_error("Clone is not allowed.", E_USER_ERROR);
+        if (empty($where)) {
+            return "Error: A WHERE condition is required to delete.";
+        }
+
+        $sql = "DELETE FROM $table_name WHERE $where";
+
+        if (mysqli_query($this->connection, $sql)) {
+            return mysqli_affected_rows($this->connection);
+        } else {
+            return "Error: " . mysqli_error($this->connection);
+        }
     }
 
-    // Prevent unserializing
-    public function __wakeup()
+    // ALTER TABLE: Add columns to a table dynamically
+    public function alterTableAddColumn($table_name, $columns)
     {
-        trigger_error("Unserializing is not allowed.", E_USER_ERROR);
+        $columnDefinitions = [];
+        foreach ($columns as $column_name => $column_definition) {
+            $columnDefinitions[] = "ADD $column_name $column_definition";
+        }
+        $sql = "ALTER TABLE $table_name " . implode(", ", $columnDefinitions);
+
+        if (mysqli_query($this->connection, $sql)) {
+            return "Columns added successfully to $table_name.";
+        } else {
+            return "Error adding columns: " . mysqli_error($this->connection);
+        }
     }
 }
