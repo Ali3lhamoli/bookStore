@@ -22,6 +22,9 @@ class DatabaseConnection
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
+
+        // Select the database after creating the connection
+        // $this->selectDatabase();
     }
 
     // Get the single instance of the class

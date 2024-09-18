@@ -13,11 +13,11 @@ echo ($id);
 $crud = new DatabaseCrud();
 DatabaseConnection::getInstance()->selectDatabase();
 $result = $crud->read('books', "`id` = $id");
- $fav = $crud->readLIMIT('books' );
- $serves = $crud->read('services');
+$fav = $crud->readLIMIT('books');
+$serves = $crud->read('services');
 $Q = $crud->read('description_single_products');
 
- 
+
 ?>
 <style>
   a{
@@ -183,41 +183,41 @@ $Q = $crud->read('description_single_products');
       <hr class="flex-grow-1">
     </div>
     <div class="row">
-      <?php 
-      foreach($fav as $product):
-      ?>
-      <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
-        <div class="product__header mb-3">
-          <a href="single-product.html">
-            <div class="product__img-cont">
-              <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image']?>" data-id="white">
+      <?php
+      foreach ($fav as $product):
+        ?>
+        <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
+          <div class="product__header mb-3">
+            <a href="single-product.html">
+              <div class="product__img-cont">
+                <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image'] ?>" data-id="white">
+              </div>
+            </a>
+            <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
+              وفر 10%
             </div>
-          </a>
-          <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
-            وفر 10%
+            <div
+              class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
+              <i class="fa-regular fa-heart"></i>
+            </div>
           </div>
-          <div
-            class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
-            <i class="fa-regular fa-heart"></i>
+          <div class="product__title text-center">
+            <a class="text-black text-decoration-none" href="single-product.html">
+              <?= $product['title'] ?>
+            </a>
+          </div>
+          <div class="product__author text-center">
+            <?= $product['author'] ?>
+          </div>
+          <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
+            <span class="product__price product__price--old">
+              <?= $product['offer'] ?> جنيه
+            </span>
+            <span class="product__price">
+              <?= $product['price'] ?> جنيه
+            </span>
           </div>
         </div>
-        <div class="product__title text-center">
-          <a class="text-black text-decoration-none" href="single-product.html">
-           <?= $product['title']?>
-          </a>
-        </div>
-        <div class="product__author text-center">
-          <?= $product['author']?>
-        </div>
-        <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
-          <span class="product__price product__price--old">
-            <?= $product['offer'] ?> جنيه
-          </span>
-          <span class="product__price">
-          <?= $product['price'] ?> جنيه
-          </span>
-        </div>
-      </div>
       <?php endforeach ?>
     </div>
   </section>
@@ -230,41 +230,41 @@ $Q = $crud->read('description_single_products');
       <hr class="flex-grow-1">
     </div>
     <div class="row">
-    <?php 
-      foreach($fav as $product):
-      ?>
-      <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
-        <div class="product__header mb-3">
-          <a href="single-product.html">
-            <div class="product__img-cont">
-              <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image']?>" data-id="white">
+      <?php
+      foreach ($fav as $product):
+        ?>
+        <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
+          <div class="product__header mb-3">
+            <a href="single-product.html">
+              <div class="product__img-cont">
+                <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image'] ?>" data-id="white">
+              </div>
+            </a>
+            <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
+              وفر 10%
             </div>
-          </a>
-          <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
-            وفر 10%
+            <div
+              class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
+              <i class="fa-regular fa-heart"></i>
+            </div>
           </div>
-          <div
-            class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
-            <i class="fa-regular fa-heart"></i>
+          <div class="product__title text-center">
+            <a class="text-black text-decoration-none" href="single-product.html">
+              <?= $product['title'] ?>
+            </a>
+          </div>
+          <div class="product__author text-center">
+            <?= $product['author'] ?>
+          </div>
+          <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
+            <span class="product__price product__price--old">
+              <?= $product['offer'] ?> جنيه
+            </span>
+            <span class="product__price">
+              <?= $product['price'] ?> جنيه
+            </span>
           </div>
         </div>
-        <div class="product__title text-center">
-          <a class="text-black text-decoration-none" href="single-product.html">
-           <?= $product['title']?>
-          </a>
-        </div>
-        <div class="product__author text-center">
-          <?= $product['author']?>
-        </div>
-        <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
-          <span class="product__price product__price--old">
-            <?= $product['offer'] ?> جنيه
-          </span>
-          <span class="product__price">
-          <?= $product['price'] ?> جنيه
-          </span>
-        </div>
-      </div>
       <?php endforeach ?>
     </div>
   </section>
