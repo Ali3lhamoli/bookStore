@@ -16,7 +16,57 @@ if (mysqli_query($db, $sql)) {
 
 // Now select the created database
 DatabaseConnection::getInstance()->selectDatabase();
+$connection = DatabaseConnection::getInstance()->getConnection();
 
+ 
+$checkOfferColumn = mysqli_query($connection, "SHOW COLUMNS FROM `books` LIKE 'offer'");
+if (mysqli_num_rows($checkOfferColumn) == 0) {
+  
+    $addOfferColumn = "ALTER TABLE `books` ADD COLUMN `offer` INT";
+    if (mysqli_query($connection, $addOfferColumn)) {
+        echo "Column 'offer' added successfully.<br>";
+    } else {
+        echo "Error adding 'offer' column: " . mysqli_error($connection) . "<br>";
+    }
+} else {
+    echo "Column 'offer' already exists.<br>";
+}
+ 
+$checkOfferColumn = mysqli_query($connection, "SHOW COLUMNS FROM `books` LIKE 'image'");
+if (mysqli_num_rows($checkOfferColumn) == 0) {
+  
+    $addOfferColumn = "ALTER TABLE `books` ADD COLUMN `image` varchar(200)";
+    if (mysqli_query($connection, $addOfferColumn)) {
+        echo "Column 'offer' added successfully.<br>";
+    } else {
+        echo "Error adding 'offer' column: " . mysqli_error($connection) . "<br>";
+    }
+} else {
+    echo "Column 'offer' already exists.<br>";
+}
+ 
+  
+
+// if (mysqli_query($connection, $sql)) {
+//     echo "Column 'icon' added successfully to the 'service' table.";
+// } else {
+//     echo "Error adding column: " . mysqli_error($connection);
+// }
+
+
+
+$sql = "CREATE TABLE IF NOT EXISTS `description_single_products` (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+Q varchar(100),
+Ansare varchar(250)
+);";
+
+if (mysqli_query($connection, $sql)) {
+    echo "Column 'icon' added successfully to the 'service' table.";
+} else {
+    echo "Error adding column: " . mysqli_error($connection);
+}
+ 
 // List of tables to create
 $tables = [
     // Users table
@@ -27,6 +77,7 @@ $tables = [
         password VARCHAR(255) NOT NULL,
         role ENUM('customer', 'admin') NOT NULL DEFAULT 'customer'
     )",
+ 
 
     // Books table
     "CREATE TABLE IF NOT EXISTS books (
@@ -35,7 +86,8 @@ $tables = [
         author VARCHAR(255) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         stock INT NOT NULL,
-        description TEXT
+        description TEXT,    
+        image VARCHAR(200)
     )",
 
     // Orders table
