@@ -11,7 +11,7 @@ class DatabaseConnection
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $dbname = "BookStore";
+    private $dbname = "bookstore";
 
     // Private constructor to prevent multiple instances
     private function __construct()
