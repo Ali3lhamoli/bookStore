@@ -9,12 +9,12 @@ $crud = new DatabaseCrud();
 
 // insert data into slider table
 
-// $insertData = [
-//     'image' => '01.png'
-// ];
-// $insertId = $crud->create('homeslider', $insertData);
+$insertData = [
+    'image' => '01.png'
+];
+$insertId = $crud->create('homeslider', $insertData);
 
-// echo "New record created successfully in slider table. $insertId <br>";
+echo "New record created successfully in slider table. $insertId <br>";
 
 
 // alter column to books table
@@ -32,7 +32,7 @@ $crud = new DatabaseCrud();
 //     'title' => 'C# 10 in a Nutshell',
 //     'author' => 'Frank Zammetti',
 //     'price' => 5000.00,
-//     'stock' => 30,
+//     'stock' => 30, 
 //     'purchases' => 20,
 //     'pages' => 373,
 //     'discount_price' => 200.00,

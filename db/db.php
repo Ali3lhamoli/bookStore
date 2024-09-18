@@ -3,8 +3,9 @@
 require_once "../classes/DatabaseConnection.php";
 
 // Create connection
-$db = DatabaseConnection::getInstance()->getConnection();
-$dbname = DatabaseConnection::getInstance()->getDbName();
+$dbConnection = DatabaseConnection::getInstance();
+$db = $dbConnection->getConnection();
+$dbname = $dbConnection->getDbName();
 
 // Create database
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
@@ -14,9 +15,11 @@ if (mysqli_query($db, $sql)) {
     die("Error creating database: " . mysqli_error($db) . "\n");
 }
 
+$dbConnection->selectDatabase();
 
 // List of tables to create
 $tables = [
+
     // Users table
     "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -151,6 +154,7 @@ $tables = [
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(250)
     )",
+
 
     "CREATE TABLE IF NOT EXISTS `description_single_products` (
     id INT AUTO_INCREMENT PRIMARY KEY,
