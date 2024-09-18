@@ -24,8 +24,11 @@ class DatabaseConnection
         }
 
         // Select the database after creating the connection
-        // $this->selectDatabase();
-    }
+          $sql = "SHOW DATABASES LIKE $this->dbname";
+        if (!mysqli_query($this->connection, $sql)) {
+            $this->selectDatabase();
+        }
+     }
 
     // Get the single instance of the class
     public static function getInstance()
@@ -46,9 +49,7 @@ class DatabaseConnection
     // Select the database after creating it
     public function selectDatabase()
     {
-        if (!$this->connection->select_db($this->dbname)) {
-            die("Database selection failed: " . $this->connection->error);
-        }
+        return $this->connection->select_db($this->dbname);
     }
 
     // Get the database name
