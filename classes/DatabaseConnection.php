@@ -11,7 +11,7 @@ class DatabaseConnection
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $dbname = "BookStore";
+    private $dbname = "bookstore";
 
     // Private constructor to prevent multiple instances
     private function __construct()
@@ -21,6 +21,12 @@ class DatabaseConnection
 
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
+        }
+
+        // Select the database after creating the connection
+        $sql = "SHOW DATABASES LIKE $this->dbname";
+        if (!mysqli_query($this->connection, $sql)) {
+            $this->selectDatabase();
         }
     }
 
@@ -43,9 +49,7 @@ class DatabaseConnection
     // Select the database after creating it
     public function selectDatabase()
     {
-        if (!$this->connection->select_db($this->dbname)) {
-            die("Database selection failed: " . $this->connection->error);
-        }
+        return $this->connection->select_db($this->dbname);
     }
 
     // Get the database name
