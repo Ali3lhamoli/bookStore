@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $config = require_once 'config.php';
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {

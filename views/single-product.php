@@ -19,7 +19,11 @@ $Q = $crud->read('description_single_products');
 
  
 ?>
-
+<style>
+  a{
+    text-decoration:none;
+  }
+</style>
 
 
 <main>
@@ -54,7 +58,7 @@ $Q = $crud->read('description_single_products');
               <button
                 class="single-product__decrease border-0 bg-transparent position-absolute start-0 h-100 px-3">-</button>
             </div>
-            <button class="single-product__add-to-cart primary-button w-100">اضافه الي السلة</button>
+            <a class="single-product__add-to-cart primary-button w-100 text" href="<?php echo  $config['base_url'] ?>controllers/add_to_cart.php?id=<?=$item['id']?>">اضافه الي السلة</a>
           </div>
           <div class="single-product__favourite d-flex align-items-center gap-2 mb-4">
             <i class="fa-regular fa-heart"></i>

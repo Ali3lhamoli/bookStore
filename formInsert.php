@@ -1,5 +1,5 @@
 <?php
-require_once "./funtion.php";
+require_once "./function.php";
 $connection= new mysqli("localhost","root","","bookStore");
 
 

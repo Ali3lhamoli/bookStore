@@ -39,7 +39,7 @@ class DatabaseCrud
             return [];
         }
     }
-    public function readLIMIT($table_name     )
+    public function readLIMIT($table_name)
     {
         $sql= "SELECT * from $table_name LIMIT 0,4" ;
 
