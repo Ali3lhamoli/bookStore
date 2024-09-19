@@ -7,11 +7,13 @@ require_once 'classes/DatabaseConnection.php';
 
 
 
-
+echo "<pre>";
+print_r( $_SESSION['cart']);
+echo "</pre>";
 $id = $_GET['id'];
-echo ($id);
+ 
 $crud = new DatabaseCrud();
-DatabaseConnection::getInstance()->selectDatabase();
+// DatabaseConnection::getInstance()->selectDatabase();
 $result = $crud->read('books', "`id` = $id");
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');
@@ -43,12 +45,16 @@ $Q = $crud->read('description_single_products');
           <div class="product__author"><?= $item['author'] ?></div>
           <div class="product__author"></div>
           <div class="product__price mb-3 text-center d-flex gap-2">
-            <span class="product__price product__price--old fs-6 ">
-              <?= $item['offer'] ?> جنيه
-            </span>
-            <span class="product__price fs-5">
-              <?= $item['price'] ?> جنيه
-            </span>
+          <?php if (isset($item['offer'])): ?>
+<h4 class="mr-1">$
+    <?= $item['offer'] ?></h4>
+    <span class="strike-text text-decoration-line-through">
+    $<?= $item['price'] ?>
+</span>
+                                <?php else: ?>
+                                    <h4 class="mr-1">$<?= $item['price'] ?></h4>
+                                <?php endif; ?>
+            
           </div>
           <div class="d-flex w-100 gap-2 mb-3">
             <div class="single-product__quanitity position-relative">

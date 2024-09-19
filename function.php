@@ -2,7 +2,7 @@
 function redirect($url)
 {
   header("Location: http://localhost/bookStore/" . $url);
-  die;
+  
 }
 function IDExists()
 {
@@ -44,9 +44,9 @@ function calculateTotalPriceP($cart)
 // }  
 //   return $total;
 // }
-function addToCart($product)
+function addToCart($product,$id)
 {
-  $id = $_GET['id'];
+    
 
   if (!isset($_SESSION['cart'][$id])) {
     $_SESSION['cart'][$id] = [
@@ -67,7 +67,7 @@ function addToCart($product)
   }
 
 }
-
+ 
 
 
 
@@ -105,5 +105,16 @@ function IDInMyProducts($products, $id)
   if (!$exists) {
     echo 'Product not found';
     die;
+  }
+}
+
+
+function findProductById($products, $id)
+{
+  //  mysqli_fetch_assoc($products);
+  foreach ($products as $product) {
+    if ($product['id'] == $id) {
+      return $product;
+    }
   }
 }

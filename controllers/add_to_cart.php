@@ -1,14 +1,23 @@
 <?php
+session_start();
 require_once "../function.php";
+require_once "../classes/DatabaseCrud.php";
+require_once "../classes/DatabaseConnection.php";
 $crud = new DatabaseCrud();
-DatabaseConnection::getInstance()->selectDatabase();
+   
 $id=$_GET['id'];
 IDExists();
 IDIsNumeric($id);
-$data = getProductIdL('products',$id);
+
 $result = $crud->read('books', "`id` = $id");
+$data= findProductById($result,$id);
 intialCart();
 
 
 
-addToCart($product);
+addToCart($data,$id);
+
+
+
+
+// unset($_SESSION['cart']);

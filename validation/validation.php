@@ -53,12 +53,12 @@ function isEmptyPassword($name)
 
 
 
-    if (   strlen($name) < 50  ) {
+    // if (   strlen($name) > 50  ) {
 
-        $_SESSION['errors']['password'] = 'the password grater than 50 ';
+    //     $_SESSION['errors']['password'] = 'the password grater than 50 ';
        
 
-    }
+    // }
 
 
     if (   6  > strlen($name)  ) {
