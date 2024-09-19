@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $config = require_once 'config.php';
 require_once 'core/functions.php';
 
@@ -34,6 +34,9 @@ if (isset($_GET['page'])) {
             break;
         case 'order-recieved':
             require_once 'views/order-recieved.php';
+            break;
+        case 'accountLogin':
+            require_once 'views/accountLogin.php';
             break;
         case 'orders':
             require_once 'views/orders.php';
