@@ -1,5 +1,10 @@
 <?php
-session_start();
+session_start();session_start();
+require_once 'classes/DatabaseConnection.php';
+require_once 'classes/DatabaseCrud.php';
+$crud = new DatabaseCrud();
+
+
 $config = require_once 'config.php';
 require_once 'core/functions.php';
 
@@ -65,9 +70,17 @@ if (isset($_GET['page'])) {
         case 'logout':
             require_once 'controllers/logout.php';
             break;
+        case 'change_account_details':
+            require_once 'controllers/change_account_details.php';
+            break;
+        case 'change_password':
+            require_once 'controllers/change_password.php';
+            break;
         default:
             require_once 'views/404.php';
     }
 } else {
     require_once 'views/home.php';
 }
+
+mysqli_close(DatabaseConnection::getInstance()->getConnection());

@@ -7,7 +7,7 @@
                 <h2><?= $sub_section; ?></h2>
             </div>
             <div class="page-top__breadcrumb">
-                <a class="text-gray" href="index.html">الرئيسية</a> /
+                <a class="text-gray" href="<?= $config['base_url']; ?>index.php?page=home">الرئيسية</a> /
                 <span class="text-gray"><?= $sub_section; ?></span>
             </div>
         </div>

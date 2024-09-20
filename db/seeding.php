@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 require_once "../classes/DatabaseConnection.php";
 require_once '../classes/DatabaseCrud.php';
+require_once '../core/functions.php';
 
 $crud = new DatabaseCrud();
 
@@ -9,10 +10,10 @@ $crud = new DatabaseCrud();
 
 // insert data into slider table
 
-$insertData = [
-    'image' => '01.png'
-];
-$insertId = $crud->create('homeslider', $insertData);
+// $insertData = [
+//     'image' => '01.png'
+// ];
+// $insertId = $crud->create('homeslider', $insertData);
 
 echo "New record created successfully in slider table. $insertId <br>";
 
@@ -32,3 +33,5 @@ $insertData = [
 $insertId = $crud->create('books', $insertData);
 
 echo "New record created successfully in books table. $insertId <br>";
+
+dd($_SESSION['change_det_errors']);
