@@ -33,7 +33,7 @@ class DatabaseCrud
 
         // If WHERE condition is provided, append it
         if (!empty($where)) {
-            $sql .= " WHERE $where";
+            $sql .= " WHERE " . $where;
         }
 
         // Append the ORDER BY clause or any additional SQL if provided

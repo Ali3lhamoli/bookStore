@@ -1,5 +1,5 @@
 <?php
-require_once "./funtion.php";
+require_once "./function.php";
 $connection= new mysqli("localhost","root","","bookStore");
 
 
@@ -7,10 +7,10 @@ $connection= new mysqli("localhost","root","","bookStore");
     $title=$_POST['title'];
     $author=$_POST['author'];
     $price=$_POST['price'];
-    $offer=$_POST['offer'];
+     $pages=$_POST['pages'];
+     $discount_price=$_POST['discount_price'];
     $stock=$_POST['stock'];
-    $description=$_POST['description'];
-    $image=$_FILES['image'];
+     $image=$_FILES['image'];
 
 // echo "<pre>";
 
@@ -64,19 +64,20 @@ if (!move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
 
 
 
-$products= "INSERT INTO `books` (`title`,`image`,`description`,`price`,`author`,`stock`,`offer` ) values(
+$products= "INSERT INTO `books` (`title`,`image`,`price`,`author`,`stock`,`discount_price` ) values(
 
 '$title',
 
 '$targetFile',
-
-'$description',
-
 '$price',
-
 '$author',
 '$stock',
-'$offer'
+'$discount_price'
+
+ 
+ 
+
+
  
  
 
