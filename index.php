@@ -59,6 +59,9 @@ if (isset($_GET['page'])) {
         case 'track-order':
             require_once 'views/track-order.php';
             break;
+        case 'track-order-controller':
+            require_once 'controllers/track-order.php';
+            break;
         case 'logout':
             require_once 'controllers/logout.php';
             break;

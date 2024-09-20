@@ -28,8 +28,6 @@ class DatabaseConnection
 
         if (mysqli_num_rows($result) > 0) {
             $this->selectDatabase();
-        } else {
-            echo "Database '$this->dbname' does not exist. You may want to create it.";
         }
     }
     // Get the single instance of the class
