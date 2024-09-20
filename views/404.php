@@ -14,6 +14,6 @@ require_once 'inc/subSectionFromMain.php';
 
 <?php
 
-require_once 'inc/footer.php'; 
+require_once 'inc/footer.php';
 
 ?>

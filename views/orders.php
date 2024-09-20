@@ -5,100 +5,76 @@ require_once 'inc/nav.php';
 
 $sub_section = 'حسابى';
 require_once 'inc/subSectionFromMain.php';
+require_once 'inc/sidebar.php';
+
 
 ?>
 
 
-  <section class="section-container profile my-3 my-md-5 py-5 d-md-flex gap-5">
-    <div class="profile__right">
-      <div class="profile__user mb-3 d-flex gap-3 align-items-center">
-        <div class="profile__user-img rounded-circle overflow-hidden">
-          <img class="w-100" src="assets/images/user.png" alt="">
-        </div>
-        <div class="profile__user-name">moamenyt</div>
-      </div>
-      <ul class="profile__tabs list-unstyled ps-3">
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="profile.html">لوحة التحكم</a>
-        </li>
-        <li class="profile__tab active">
-          <a class="py-2 px-3 text-black text-decoration-none" href="orders.html">الطلبات</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="account_details.html">تفاصيل الحساب</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="favourites.html">المفضلة</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="">تسجيل الخروج</a>
-        </li>
-      </ul>
+<div class="profile__left mt-4 mt-md-0 w-100">
+  <div class="profile__tab-content orders active">
+    <div class="orders__none d-flex justify-content-between align-items-center py-3 px-4">
+      <p class="m-0">لم يتم تنفيذ اي طلب بعد.</p>
+      <button class="primary-button">تصفح المنتجات</button>
     </div>
-    <div class="profile__left mt-4 mt-md-0 w-100">
-      <div class="profile__tab-content orders active">
-        <div class="orders__none d-flex justify-content-between align-items-center py-3 px-4">
-          <p class="m-0">لم يتم تنفيذ اي طلب بعد.</p>
-          <button class="primary-button">تصفح المنتجات</button>
-        </div>
 
-        <table class="orders__table w-100">
-          <thead>
-            <th class="d-none d-md-table-cell">الطلب</th>
-            <th class="d-none d-md-table-cell">التاريخ</th>
-            <th class="d-none d-md-table-cell">الحالة</th>
-            <th class="d-none d-md-table-cell">الاجمالي</th>
-            <th class="d-none d-md-table-cell">اجراءات</th>
-          </thead>
-          <tbody>
-            <tr class="order__item">
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="fw-bolder d-md-none">الطلب:</div>
-                <div><a href="">#79574</a></div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="fw-bolder d-md-none">التاريخ:</div>
-                <div>يوليو 25, 2023</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="fw-bolder d-md-none">الحالة:</div>
-                <div>قيد التنفيذ</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="fw-bolder d-md-none">الاجمالي:</div>
-                <div>239.0 جنيه لعنصر واحد</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="fw-bolder d-md-none">اجراءات:</div>
-                <div><a class="primary-button" href="">عرض</a></div>
-              </td>
-            </tr>
-            <tr class="order__item">
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="d-md-none">الطلب:</div>
-                <div><a href="">#79574</a></div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="d-md-none">التاريخ:</div>
-                <div>يوليو 25, 2023</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="d-md-none">الحالة:</div>
-                <div>قيد التنفيذ</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="d-md-none">الاجمالي:</div>
-                <div>239.0 جنيه لعنصر واحد</div>
-              </td>
-              <td class="d-flex justify-content-between d-md-table-cell">
-                <div class="d-md-none">اجراءات:</div>
-                <div><a class="primary-button" href="">عرض</a></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- <section class="section-container">
+    <table class="orders__table w-100">
+      <thead>
+        <th class="d-none d-md-table-cell">الطلب</th>
+        <th class="d-none d-md-table-cell">التاريخ</th>
+        <th class="d-none d-md-table-cell">الحالة</th>
+        <th class="d-none d-md-table-cell">الاجمالي</th>
+        <th class="d-none d-md-table-cell">اجراءات</th>
+      </thead>
+      <tbody>
+        <tr class="order__item">
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="fw-bolder d-md-none">الطلب:</div>
+            <div><a href="">#79574</a></div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="fw-bolder d-md-none">التاريخ:</div>
+            <div>يوليو 25, 2023</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="fw-bolder d-md-none">الحالة:</div>
+            <div>قيد التنفيذ</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="fw-bolder d-md-none">الاجمالي:</div>
+            <div>239.0 جنيه لعنصر واحد</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="fw-bolder d-md-none">اجراءات:</div>
+            <div><a class="primary-button" href="">عرض</a></div>
+          </td>
+        </tr>
+        <tr class="order__item">
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="d-md-none">الطلب:</div>
+            <div><a href="">#79574</a></div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="d-md-none">التاريخ:</div>
+            <div>يوليو 25, 2023</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="d-md-none">الحالة:</div>
+            <div>قيد التنفيذ</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="d-md-none">الاجمالي:</div>
+            <div>239.0 جنيه لعنصر واحد</div>
+          </td>
+          <td class="d-flex justify-content-between d-md-table-cell">
+            <div class="d-md-none">اجراءات:</div>
+            <div><a class="primary-button" href="">عرض</a></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <section class="section-container">
           <p>تم تقديم الطلب #79917 في يوليو 26, 2023 وهو الآن بحالة قيد التنفيذ.</p>
     
           <section>
@@ -177,8 +153,8 @@ require_once 'inc/subSectionFromMain.php';
             </div>
           </section>
         </section> -->
-    </div>
-  </section>
+</div>
+</section>
 </main>
 
 <?php

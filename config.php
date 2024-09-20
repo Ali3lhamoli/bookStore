@@ -1,4 +1,4 @@
-<?php 
-return[
+<?php
+return [
     "base_url" => "http://localhost/bookStore/"
 ];
