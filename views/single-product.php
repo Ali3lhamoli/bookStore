@@ -7,11 +7,13 @@ require_once 'classes/DatabaseConnection.php';
 
 
 
-
+echo "<pre>";
+print_r( $_SESSION['cart']);
+echo "</pre>";
 $id = $_GET['id'];
-echo ($id);
+ 
 $crud = new DatabaseCrud();
-DatabaseConnection::getInstance()->selectDatabase();
+// DatabaseConnection::getInstance()->selectDatabase();
 $result = $crud->read('books', "`id` = $id");
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');
@@ -19,7 +21,11 @@ $Q = $crud->read('description_single_products');
 
 
 ?>
-
+<style>
+  a{
+    text-decoration:none;
+  }
+</style>
 
 
 <main>
@@ -39,12 +45,16 @@ $Q = $crud->read('description_single_products');
           <div class="product__author"><?= $item['author'] ?></div>
           <div class="product__author"></div>
           <div class="product__price mb-3 text-center d-flex gap-2">
-            <span class="product__price product__price--old fs-6 ">
-              <?= $item['offer'] ?> جنيه
-            </span>
-            <span class="product__price fs-5">
-              <?= $item['price'] ?> جنيه
-            </span>
+          <?php if (isset($item['offer'])): ?>
+<h4 class="mr-1">$
+    <?= $item['offer'] ?></h4>
+    <span class="strike-text text-decoration-line-through">
+    $<?= $item['price'] ?>
+</span>
+                                <?php else: ?>
+                                    <h4 class="mr-1">$<?= $item['price'] ?></h4>
+                                <?php endif; ?>
+            
           </div>
           <div class="d-flex w-100 gap-2 mb-3">
             <div class="single-product__quanitity position-relative">
@@ -54,7 +64,7 @@ $Q = $crud->read('description_single_products');
               <button
                 class="single-product__decrease border-0 bg-transparent position-absolute start-0 h-100 px-3">-</button>
             </div>
-            <button class="single-product__add-to-cart primary-button w-100">اضافه الي السلة</button>
+            <a class="single-product__add-to-cart primary-button w-100 text" href="<?php echo  $config['base_url'] ?>controllers/add_to_cart.php?id=<?=$item['id']?>">اضافه الي السلة</a>
           </div>
           <div class="single-product__favourite d-flex align-items-center gap-2 mb-4">
             <i class="fa-regular fa-heart"></i>

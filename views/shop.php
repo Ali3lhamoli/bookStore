@@ -9,8 +9,8 @@ require_once 'classes/DatabaseCrud.php';
 require_once 'classes/DatabaseConnection.php';
 
 
-DatabaseConnection::getInstance()->selectDatabase();
-$crud = new DatabaseCrud();
+ 
+  $crud = new DatabaseCrud();  
 $result = $crud->read('books'); // Specify your table name
 // print_r($result['title']); 
 

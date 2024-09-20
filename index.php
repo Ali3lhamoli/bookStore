@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();session_start();
 require_once 'classes/DatabaseConnection.php';
 require_once 'classes/DatabaseCrud.php';
 $crud = new DatabaseCrud();
@@ -40,6 +40,9 @@ if (isset($_GET['page'])) {
         case 'order-recieved':
             require_once 'views/order-recieved.php';
             break;
+        case 'accountLogin':
+            require_once 'views/accountLogin.php';
+            break;
         case 'orders':
             require_once 'views/orders.php';
             break;
@@ -60,6 +63,9 @@ if (isset($_GET['page'])) {
             break;
         case 'track-order':
             require_once 'views/track-order.php';
+            break;
+        case 'track-order-controller':
+            require_once 'controllers/track-order.php';
             break;
         case 'logout':
             require_once 'controllers/logout.php';

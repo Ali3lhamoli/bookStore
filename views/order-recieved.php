@@ -1,43 +1,73 @@
 <?php
-
+session_start();
 require_once 'inc/header.php';
 require_once 'inc/nav.php';
 
-$sub_section = 'حسابى';
+$sub_section = 'تتبع طلبك';
 require_once 'inc/subSectionFromMain.php';
+
+$orderDetails = $_SESSION['order_details'] ?? '';
+
+
+
+if ($orderDetails && $orderDetails === null) {
+  header("Location: " . $config['base_url'] . "index.php?page=track-order");
+  exit;
+}
 
 ?>
 
 <section class="section-container profile my-5 py-5">
   <div class="text-center mb-5">
     <div class="success-gif m-auto">
-      <img class="w-100" src="assets/images/success.gif" alt="" />
+      <?php if ($orderDetails['shipping_status'] == 'pending'): ?>
+        <img class="w-100" src="assets/images/pending.gif" alt="Order Pending" />
+        <h4 class="mb-4">جاري تجهيز طلبك الآن</h4>
+        <p class="mb-1">سيقوم أحد ممثلي خدمة العملاء بالتواصل معك لتأكيد الطلب</p>
+        <p>برجاء الرد على الأرقام الغير مسجلة</p>
+      <?php elseif ($orderDetails['shipping_status'] == 'shipped'): ?>
+        <img class="w-100" src="assets/images/shipped.gif" alt="Order Shipped" />
+        <h4 class="mb-4">تم شحن طلبك</h4>
+        <p class="mb-1">سيتم توصيل طلبك قريبًا. شكرًا لتعاملك معنا.</p>
+      <?php elseif ($orderDetails['shipping_status'] == 'delivered'): ?>
+        <img class="w-100" src="assets/images/delivered.gif" alt="Order Delivered" />
+        <h4 class="mb-4">تم توصيل طلبك</h4>
+        <p class="mb-1">شكرًا لتعاملك معنا. نتمنى أن تكون سعيدًا بمنتجاتك.</p>
+      <?php elseif ($orderDetails['shipping_status'] == 'cancelled'): ?>
+        <img class="w-100" src="assets/images/cancelled.gif" alt="Order Cancelled" />
+        <h4 class="mb-4">تم إلغاء طلبك</h4>
+        <p class="mb-1">عذرًا، لقد تم إلغاء طلبك. برجاء التواصل معنا إذا كان هناك أي استفسارات.</p>
+      <?php endif; ?>
     </div>
-    <h4 class="mb-4">جاري تجهيز طلبك الآن</h4>
-    <p class="mb-1">
-      سيقوم أحد ممثلي خدمة العملاء بالتواصل معك لتأكيد الطلب
-    </p>
-    <p>برجاء الرد على الأرقام الغير مسجلة</p>
-    <button class="primary-button">تصفح منتجات اخري</button>
+    <a href="<?php echo $config['base_url'] .'index.php?page=orders' ?>" class="primary-button">تصفح منتجات أخرى</a>
   </div>
+
   <div>
     <p>شكرًا لك. تم استلام طلبك.</p>
     <div class="d-flex flex-wrap gap-2">
       <div class="success__details">
         <p class="success__small">رقم الطلب:</p>
-        <p class="fw-bolder">79917</p>
+        <p class="fw-bolder"><?php echo $orderDetails['id']; ?></p>
       </div>
       <div class="success__details">
         <p class="success__small">التاريخ:</p>
-        <p class="fw-bolder">يوليو 26, 2023</p>
+        <p class="fw-bolder"><?php echo date('d-m-Y', strtotime($orderDetails['created_at'])); ?></p>
       </div>
       <div class="success__details">
         <p class="success__small">البريد الإلكتروني:</p>
-        <p class="fw-bolder">moamenyt@gmail.com</p>
+        <p class="fw-bolder"><?php echo $orderDetails['email']; ?></p>
       </div>
       <div class="success__details">
         <p class="success__small">الإجمالي:</p>
-        <p class="fw-bolder">389.00 جنيه</p>
+        <p class="fw-bolder"><?php echo $orderDetails['total_price']; ?> جنيه</p>
+      </div>
+      <div class="success__details">
+        <p class="success__small">حالة الدفع:</p>
+        <p class="fw-bolder"><?php echo ucfirst($orderDetails['payment_status']); ?></p>
+      </div>
+      <div class="success__details">
+        <p class="success__small">حالة الشحن:</p>
+        <p class="fw-bolder"><?php echo ucfirst($orderDetails['shipping_status']); ?></p>
       </div>
     </div>
   </div>
@@ -53,61 +83,51 @@ require_once 'inc/subSectionFromMain.php';
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          <div>
-            <a href="">كوتش فلات ديزارت -رجالى - الابيض, 42</a> x 1
-          </div>
-          <div>
-            <span class="fw-bold">اللون:</span>
-            <span>لابيض</span>
-          </div>
-          <div>
-            <span class="fw-bold">المقاس:</span>
-            <span>42</span>
-          </div>
-        </td>
-        <td>200.00 جنيه</td>
-      </tr>
-      <tr>
-        <td>
-          <div><a href="">كوتش كاجوال -رجالى - بنى, 43</a> x 1</div>
-          <div>
-            <span class="fw-bold">اللون:</span>
-            <span>بني</span>
-          </div>
-          <div>
-            <span class="fw-bold">المقاس:</span>
-            <span>43</span>
-          </div>
-        </td>
-        <td>150.00 جنيه</td>
-      </tr>
+      <?php
+      $orderItems = $crud->read(
+        "order_items JOIN books ON order_items.book_id = books.id",
+        "order_items.order_id = '" . $orderDetails['id'] . "'",
+        "books.title, order_items.quantity, order_items.unit_price"
+      );
+      $total = 0;
+      foreach ($orderItems as $item) {
+        $total += $item['unit_price'] * $item['quantity'];
+      ?>
+        <tr>
+          <td>
+            <div>
+              <a href="#"><?php echo $item['title']; ?>, <?php echo $item['quantity']; ?></a> x <?php echo $item['quantity']; ?>
+            </div>
+          </td>
+          <td><?php echo $item['unit_price']; ?> جنيه</td>
+        </tr>
+      <?php } ?>
       <tr>
         <th>المجموع:</th>
-        <td class="fw-bolder">350.00 جنيه</td>
+        <td class="fw-bolder"><?php echo $total; ?> جنيه</td>
       </tr>
       <tr>
         <th>الإجمالي:</th>
-        <td class="fw-bold">389.00 جنيه</td>
+        <td class="fw-bold"><?php echo $orderDetails['total_price']; ?> جنيه</td>
       </tr>
     </tbody>
   </table>
 </section>
+
 <section class="section-container mb-5">
   <h2>عنوان الفاتورة</h2>
   <div class="border p-3 rounded-3">
-    <p class="mb-1">محمد محسن</p>
-    <p class="mb-1">43 الاتحاد</p>
-    <p class="mb-1">القاهرة</p>
-    <p class="mb-1">01020288964</p>
-    <p class="mb-1">moamenyt@gmail.com</p>
+    <p class="mb-1"><?php echo $orderDetails['billing_name']; ?></p>
+    <p class="mb-1"><?php echo $orderDetails['billing_address']; ?></p>
+    <p class="mb-1"><?php echo $orderDetails['billing_city']; ?></p>
+    <p class="mb-1"><?php echo $orderDetails['billing_postal_code']; ?></p>
+    <p class="mb-1"><?php echo $orderDetails['billing_phone']; ?></p>
+    <p class="mb-1"><?php echo $orderDetails['billing_email']; ?></p>
   </div>
 </section>
-</main>
 
 <?php
+unset($_SESSION['order_details']);
 
 require_once 'inc/footer.php';
-
 ?>
