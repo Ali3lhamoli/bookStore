@@ -1,32 +1,43 @@
 <?php
-session_start(); 
- ?>
+// session_start(); 
+?>
+
+<?php
+//  require_once "../classes/DatabaseConnection.php";
+require_once "classes/DatabaseConnection.php";
+require_once "classes/DatabaseCrud.php";
+require_once "function.php";
+
+$crud = new DatabaseCrud();
+?>
+
 
 <div>
-    <div class="header-container fixed-top border-bottom">
-      <header>
-        <div class="section-container d-flex justify-content-between">
-          <div class="header__email d-flex gap-2 align-items-center">
-            <i class="fa-regular fa-envelope"></i>
-            coding.arabic@gmail.com
-          </div>
-          <div class="header__info d-none d-lg-block">
-            شحن مجاني للطلبات 💥 عند الشراء ب 699ج او اكثر
-          </div>
-          <div class="header__branches d-flex gap-2 align-items-center">
-            <a class="text-white text-decoration-none" href="<?= $config['base_url'];?>index.php?page=branches">
-              <i class="fa-solid fa-location-dot"></i>
-              فروعنا  
-            </a>
-          </div>
+  <div class="header-container fixed-top border-bottom">
+    <header>
+      <div class="section-container d-flex justify-content-between">
+        <div class="header__email d-flex gap-2 align-items-center">
+          <i class="fa-regular fa-envelope"></i>
+          coding.arabic@gmail.com
         </div>
-      </header>
-      <!--    -->
- <?php 
-if(isset($_SESSION['client'])):
- ?>
+        <div class="header__info d-none d-lg-block">
+          شحن مجاني للطلبات 💥 عند الشراء ب 699ج او اكثر
+        </div>
+        <div class="header__branches d-flex gap-2 align-items-center">
+          <a class="text-white text-decoration-none" href="<?= $config['base_url']; ?>index.php?page=branches">
+            <i class="fa-solid fa-location-dot"></i>
+            فروعنا
+          </a>
+        </div>
+      </div>
+    </header>
+    <!--    -->
+    <?php
+    //  $data = $crud->read('books');
+    if (isset($_SESSION['client'])):
+      ?>
 
-<nav class="nav">
+      <nav class="nav">
         <div class="section-container w-100 d-flex align-items-center gap-4 h-100">
           <div class="nav__categories-btn align-items-center justify-content-center rounded-1 d-none d-lg-flex">
             <button class="border-0 bg-transparent" data-bs-toggle="offcanvas" data-bs-target="#nav__categories">
@@ -34,7 +45,7 @@ if(isset($_SESSION['client'])):
             </button>
           </div>
           <div class="nav__logo">
-            <a href="<?= $config['base_url'];?>index.php?page=home">
+            <a href="<?= $config['base_url']; ?>index.php?page=home">
               <img class="h-100" src="assets/images/logo.png" alt="">
             </a>
           </div>
@@ -52,21 +63,26 @@ if(isset($_SESSION['client'])):
                 <i class="fa-solid fa-chevron-down fa-2xs"></i>
               </a>
               <ul class="nav__user-list position-absolute p-0 list-unstyled bg-white">
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=profile">لوحة التحكم</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=orders">الطلبات</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=account_details">تفاصيل الحساب</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=favourites">المفضلة</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=logout">تسجيل الخروج</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=profile">لوحة
+                    التحكم</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=orders">الطلبات</a>
+                </li>
+                <li class="nav__link nav__user-link"><a
+                    href="<?= $config['base_url']; ?>index.php?page=account_details">تفاصيل الحساب</a></li>
+                <li class="nav__link nav__user-link"><a
+                    href="<?= $config['base_url']; ?>index.php?page=favourites">المفضلة</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=logout">تسجيل
+                    الخروج</a></li>
               </ul>
             </li>
             <!-- <li class="nav__link">
-              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url'];?>index.php?page=account">
+              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=account">
                 تسجيل الدخول
                 <i class="fa-regular fa-user"></i>
               </a>
             </li> -->
             <li class="nav__link">
-              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url'];?>index.php?page=favourites">
+              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=favourites">
                 المفضلة
                 <div class="position-relative">
                   <i class="fa-regular fa-heart"></i>
@@ -92,7 +108,8 @@ if(isset($_SESSION['client'])):
         <div class="nav-mobile fixed-bottom d-block d-lg-none">
           <ul class="nav-mobile__list d-flex justify-content-around gap-2 list-unstyled  m-0 border-top">
             <li class="nav-mobile__link">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=home">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=home">
                 <i class="fa-solid fa-house"></i>
                 الرئيسية
               </a>
@@ -103,15 +120,17 @@ if(isset($_SESSION['client'])):
               الاقسام
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=profile">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=profile">
                 <i class="fa-regular fa-user"></i>
-                حسابي 
+                حسابي
               </a>
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=favourites">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=favourites">
                 <i class="fa-regular fa-heart"></i>
-                المفضلة 
+                المفضلة
               </a>
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1" data-bs-toggle="offcanvas"
@@ -124,8 +143,8 @@ if(isset($_SESSION['client'])):
         </div>
       </nav>
 
-      <?php  elseif(!isset($_SESSION['client'])):?>
-        <nav class="nav">
+    <?php elseif (!isset($_SESSION['client'])): ?>
+      <nav class="nav">
         <div class="section-container w-100 d-flex align-items-center gap-4 h-100">
           <div class="nav__categories-btn align-items-center justify-content-center rounded-1 d-none d-lg-flex">
             <button class="border-0 bg-transparent" data-bs-toggle="offcanvas" data-bs-target="#nav__categories">
@@ -133,7 +152,7 @@ if(isset($_SESSION['client'])):
             </button>
           </div>
           <div class="nav__logo">
-            <a href="<?= $config['base_url'];?>index.php?page=home">
+            <a href="<?= $config['base_url']; ?>index.php?page=home">
               <img class="h-100" src="assets/images/logo.png" alt="">
             </a>
           </div>
@@ -151,21 +170,26 @@ if(isset($_SESSION['client'])):
                 <i class="fa-solid fa-chevron-down fa-2xs"></i>
               </a>
               <ul class="nav__user-list position-absolute p-0 list-unstyled bg-white">
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=profile">لوحة التحكم</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=orders">الطلبات</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=account_details">تفاصيل الحساب</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=favourites">المفضلة</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url'];?>index.php?page=logout">تسجيل الخروج</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=profile">لوحة
+                    التحكم</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=orders">الطلبات</a>
+                </li>
+                <li class="nav__link nav__user-link"><a
+                    href="<?= $config['base_url']; ?>index.php?page=account_details">تفاصيل الحساب</a></li>
+                <li class="nav__link nav__user-link"><a
+                    href="<?= $config['base_url']; ?>index.php?page=favourites">المفضلة</a></li>
+                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=logout">تسجيل
+                    الخروج</a></li>
               </ul>
             </li>
             <li class="nav__link">
-              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url'];?>index.php?page=account">
+              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=account">
                 تسجيل الدخول
                 <i class="fa-regular fa-user"></i>
               </a>
             </li>
             <li class="nav__link">
-              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url'];?>index.php?page=favourites">
+              <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=favourites">
                 المفضلة
                 <div class="position-relative">
                   <i class="fa-regular fa-heart"></i>
@@ -191,7 +215,8 @@ if(isset($_SESSION['client'])):
         <div class="nav-mobile fixed-bottom d-block d-lg-none">
           <ul class="nav-mobile__list d-flex justify-content-around gap-2 list-unstyled  m-0 border-top">
             <li class="nav-mobile__link">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=home">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=home">
                 <i class="fa-solid fa-house"></i>
                 الرئيسية
               </a>
@@ -202,15 +227,17 @@ if(isset($_SESSION['client'])):
               الاقسام
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=profile">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=profile">
                 <i class="fa-regular fa-user"></i>
-                حسابي 
+                حسابي
               </a>
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1">
-              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none" href="<?= $config['base_url'];?>index.php?page=favourites">
+              <a class="d-flex align-items-center flex-column gap-1 text-decoration-none"
+                href="<?= $config['base_url']; ?>index.php?page=favourites">
                 <i class="fa-regular fa-heart"></i>
-                المفضلة 
+                المفضلة
               </a>
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1" data-bs-toggle="offcanvas"
@@ -222,69 +249,108 @@ if(isset($_SESSION['client'])):
           <!--  -->
         </div>
       </nav>
-      <?php  endif ?>
-      <div class="nav__categories offcanvas offcanvas-start px-4 py-2" tabindex="-1" id="nav__categories"
-        aria-labelledby="nav__categories">
-        <div class="nav__categories-header offcanvas-header justify-content-end">
-          <button type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
-            aria-label="Close">
-            <i class="fa-solid fa-x fa-1x fw-light"></i>
-          </button>
-        </div>
-        <div class="nav__categories-body offcanvas-body pt-0">
-          <div class="nav__side-logo mb-2">
-            <img class="w-100" src="assets/images/logo.png" alt="">
-          </div>
-          <ul class="nav__list list-unstyled">
-            <li class="nav__link nav__side-link"><a href="<?= $config['base_url'];?>index.php?page=shop" class="py-3">جميع المنتجات</a></li>
-            <li class="nav__link nav__side-link"><a href="<?= $config['base_url'];?>index.php?page=shop" class="py-3">كتب عربيه</a></li>
-            <li class="nav__link nav__side-link"><a href="<?= $config['base_url'];?>index.php?page=shop" class="py-3">كتب انجليزية</a></li>
-          </ul>
-        </div>
+    <?php endif ?>
+    <div class="nav__categories offcanvas offcanvas-start px-4 py-2" tabindex="-1" id="nav__categories"
+      aria-labelledby="nav__categories">
+      <div class="nav__categories-header offcanvas-header justify-content-end">
+        <button type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
+          aria-label="Close">
+          <i class="fa-solid fa-x fa-1x fw-light"></i>
+        </button>
       </div>
-
-      <div class="nav__cart offcanvas offcanvas-end px-3 py-2" tabindex="-1" id="nav__cart" aria-labelledby="nav__cart">
-        <div class="nav__categories-header offcanvas-header align-items-center">
-          <h5>سلة التسوق</h5>
-          <button type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
-            aria-label="Close">
-            <i class="fa-solid fa-x fa-1x fw-light"></i>
-          </button>
+      <div class="nav__categories-body offcanvas-body pt-0">
+        <div class="nav__side-logo mb-2">
+          <img class="w-100" src="assets/images/logo.png" alt="">
         </div>
-        <div class="nav__categories-body offcanvas-body pt-4">
-          <p>لا توجد منتجات في سلة المشتريات.</p>
-          <div class="cart-products">
-            <ul class="nav__list list-unstyled">
-              <li class="cart-products__item d-flex justify-content-between gap-2">
-                <div class="d-flex gap-2">
-                  <div>
-                    <button class="cart-products__remove">x</button>
-                  </div>
-                  <div>
-                    <p class="cart-products__name m-0 fw-bolder">Flutter Apprentice</p>
-                    <p class="cart-products__price m-0">1 x 350.00 جنيه</p>
-                  </div>
-                </div>
-                <div class="cart-products__img">
-                  <img class="w-100" src="assets/images/product-1.webp" alt="">
-                </div>
-              </li>
-            </ul>
-            <div class="d-flex justify-content-between">
-              <p class="fw-bolder">المجموع:</p>
-              <p>350.00 جنيه</p>
-            </div>
-          </div>
-          <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3 bg-success btn btn-primary" href="<?= $config['base_url'];?>index.php?page=checkout">اتمام الطلب</a>
-          <a class="nav__cart-btn text-center w-100 py-2 px-3 bg-transparent btn btn-primary" href="<?= $config['base_url'];?>index.php?page=shop">تابع التسوق</a>
-        </div>
+        <ul class="nav__list list-unstyled">
+          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">جميع
+              المنتجات</a></li>
+          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">كتب
+              عربيه</a></li>
+          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">كتب
+              انجليزية</a></li>
+        </ul>
       </div>
     </div>
 
+    <div class="nav__cart offcanvas offcanvas-end px-3 py-2" tabindex="-1" id="nav__cart" aria-labelledby="nav__cart">
+      <div class="nav__categories-header offcanvas-header align-items-center">
+        <h5>سلة التسوق</h5>
+        <button type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
+          aria-label="Close">
+          <i class="fa-solid fa-x fa-1x fw-light"></i>
+        </button>
+      </div>
+      <?php if (isset($_SESSION['cart'])): ?>
+        <div class="nav__categories-body offcanvas-body pt-4">
+          <div class="cart-products">
+            <?php foreach ($_SESSION['cart'] as $id => $cart): ?>
 
-    <!-- News Content Start -->
-    <section class="sales text-center p-2 d-block d-lg-none">
-      شحن مجاني للطلبات 💥 عند الشراء ب 699ج او اكثر
-    </section>
-    <!-- News Content End -->
+              <?php
+              // echo $id
+              $result = $crud->read('books', "`id` = $id"); ?>
+
+
+
+
+              <?php foreach ($result as $product): ?>
+                <ul class="nav__list list-unstyled">
+
+                  <li class="cart-products__item d-flex justify-content-between gap-2">
+                    <div class="d-flex gap-2">
+                      <div>
+                        <button class="cart-products__remove">x</button>
+                      </div>
+                      <div>
+                        <p class="cart-products__name m-0 fw-bolder"><?php $product['title'] ?></p>
+                        <h6><?= $cart['price'] . "جنيه" . $cart['qty'] . "X" ?></h6>
+                        <?php ($totalPrice = calculateTotalPriceA($cart)) ?>
+                        <?php ($totalPriceP = calculateTotalPriceP($_SESSION['cart'])) ?>
+                        <?php $_SESSION['totalP'] = $totalPrice; ?>
+                        <?php $_SESSION['totalBeforDis'] = $totalPriceP; ?>
+
+                      </div>
+                    </div>
+                    <div class="cart-products__img">
+                      <img class="w-100" src="<?php echo $product['image'] ?>" alt="">
+                    </div>
+                  </li>
+
+
+
+                </ul>
+              <?php endforeach ?>
+
+
+
+            <?php endforeach ?>
+
+
+
+            <div class="d-flex justify-content-between">
+              <p class="fw-bolder">المجموع:</p>
+              <p><?php echo $totalPriceP ?> جنيه</p>
+              <!-- <p><?php $totalPrice ?> جنيه</p> -->
+            </div>
+          </div>
+          <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3 bg-success btn btn-primary"
+            href="<?= $config['base_url']; ?>index.php?page=checkout">اتمام الطلب</a>
+          <a class="nav__cart-btn text-center w-100 py-2 px-3 bg-transparent btn btn-primary"
+            href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
+        </div>
+      <?php elseif (!isset($_SESSION['cart'])): ?>
+        <p>لا توجد منتجات في سلة المشتريات.</p>
+
+        <a class="nav__cart-btn text-center w-100 py-2 px-3 bg-transparent btn btn-danger"
+          href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
+      <?php endif ?>
+    </div>
   </div>
+
+
+  <!-- News Content Start -->
+  <section class="sales text-center p-2 d-block d-lg-none">
+    شحن مجاني للطلبات 💥 عند الشراء ب 699ج او اكثر
+  </section>
+  <!-- News Content End -->
+</div>

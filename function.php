@@ -2,7 +2,7 @@
 function redirect($url)
 {
   header("Location: http://localhost/bookStore/" . $url);
-  
+
 }
 function IDExists()
 {
@@ -21,15 +21,15 @@ function intialCart()
 function calculateTotalPriceA($cart)
 {
   $total = 0;
-  foreach ($cart as $item) {
-    $total += $item['price'] * $item['qty'];
-  }
+
+  $total += $cart['price'] * $cart['qty'];
+
   return $total;
 }
-function calculateTotalPriceP($cart)
+function calculateTotalPriceP($items)
 {
   $total = 0;
-  foreach ($cart as $item) {
+  foreach ($items as $item) {
     $total += $item['mony'] * $item['qty'];
   }
   return $total;
@@ -37,37 +37,37 @@ function calculateTotalPriceP($cart)
 // function calculateTotalPriceP($product,$item)
 // {
 //   $total = 0;
- 
+
 // foreach($item as $ite){
 //     $total += $product['qty'] * $item;
 
 // }  
 //   return $total;
 // }
-function addToCart($product,$id)
+function addToCart($product, $id)
 {
-    
+
 
   if (!isset($_SESSION['cart'][$id])) {
     $_SESSION['cart'][$id] = [
       //  'id'=>$id,
       'products' => $product,
       'price' => $product['offer'] ? $product['offer'] : $product['price'],
-      'mony' => $product['price'] ,
+      'mony' => $product['price'],
       'qty' => 1,
 
-    
-      'id' => ''
+
+
     ];
   } else {
     // 'products'=>$product,
-    // $_SESSION['cart'][$id]['id']=$id;
+    // $_SESSION['cart'][$id]['id']='';
     $_SESSION['cart'][$id]['products'] = $product;
     $_SESSION['cart'][$id]['qty']++;
   }
 
 }
- 
+
 
 
 
@@ -118,3 +118,4 @@ function findProductById($products, $id)
     }
   }
 }
+
