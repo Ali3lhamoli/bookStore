@@ -8,7 +8,17 @@ require_once 'inc/subSectionFromMain.php';
 
 $conn = DatabaseConnection::getInstance()->getConnection();
 $user_id = $_SESSION['client'][3];
-$favorite = "SELECT `favouriets`.*,`books`.* FROM `favouriets` INNER JOIN `books` 
+// $favorite = "SELECT `favouriets`.*,`books`.* FROM `favouriets` INNER JOIN `books` 
+//              ON `favouriets`.`book_id` = `books`.`id` 
+//              WHERE `favouriets`.`user_id` = '$user_id'";
+
+$favorite = "SELECT   
+                `favouriets`.`created_at` AS `favourite_created_at`,
+                `books`.`title`,
+                `books`.`price`,
+                `books`.`discount_price`,
+                `books`.`image`,
+                `books`.`stock` FROM `favouriets` INNER JOIN `books` 
              ON `favouriets`.`book_id` = `books`.`id` 
              WHERE `favouriets`.`user_id` = '$user_id'";
 
@@ -40,7 +50,7 @@ while ($row = mysqli_fetch_assoc($result)) {
               </span>
             </td>
             <td class="d-block d-md-table-cell favourites__img">
-              <img src="assets/images/product-1.webp" alt="" />
+              <img src="<?= $config['base_url']; ?>assets/images/books/<?= $valuo['image']; ?> " alt="" />
             </td>
             <td class="d-block d-md-table-cell">
               <a href=""> <?= $valuo['title'] ?> </a>
