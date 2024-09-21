@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 if(!empty($_SESSION['errors'])){
     redirect("index.php?page=account");
-
+    
 
 
 }else{
@@ -42,8 +42,10 @@ foreach ($user as  $client) {
   
 
     if(password_verify($passwordOf_user , $client['password']) ){
+          
         $_SESSION['client']=$client;
         
+        $_SESSION['passwordU']=$passwordOf_user;
         redirect("index.php?page=home");
 
 
@@ -71,11 +73,11 @@ foreach ($user as  $client) {
 
     }else{
         $_SESSION['errors']['email']="  X";
-        // redirect("index.php?page=account");
+        redirect("index.php?page=account");
     }
-    echo "<pre>";
-    print_r($_SESSION['client']);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['passwordU']);
+    // echo "</pre>";
 
  
 // // 

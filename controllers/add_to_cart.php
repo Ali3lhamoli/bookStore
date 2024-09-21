@@ -4,20 +4,19 @@ require_once "../function.php";
 require_once "../classes/DatabaseCrud.php";
 require_once "../classes/DatabaseConnection.php";
 $crud = new DatabaseCrud();
-   
-$id=$_GET['id'];
+
+$id = $_GET['id'];
 IDExists();
 IDIsNumeric($id);
 
 $result = $crud->read('books', "`id` = $id");
-$data= findProductById($result,$id);
+$data = findProductById($result, $id);
 intialCart();
 
 
 
-addToCart($data,$id);
-
-
+addToCart($data, $id);
 
 
 // unset($_SESSION['cart']);
+// redirect("index.php?page=single-product");
