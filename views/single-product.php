@@ -30,7 +30,7 @@ $Q = $crud->read('description_single_products');
   <!-- Product details Start -->
   <?php
   foreach ($result as $item):
-    ?>
+  ?>
     <section class="section-container my-5 pt-5 d-md-flex gap-5">
 
  
@@ -83,7 +83,7 @@ $Q = $crud->read('description_single_products');
         </div>
       </div>
     </section>
-    <?php
+  <?php
   endforeach
   ?>
   <!-- Product details End -->
@@ -174,7 +174,7 @@ $Q = $crud->read('description_single_products');
           </div>
         </div>
 
-        <?php
+      <?php
       endforeach
       ?>
     </div>
@@ -191,7 +191,7 @@ $Q = $crud->read('description_single_products');
     <div class="row">
       <?php
       foreach ($fav as $product):
-        ?>
+      ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
             <a href="single-product.html">
@@ -238,7 +238,7 @@ $Q = $crud->read('description_single_products');
     <div class="row">
       <?php
       foreach ($fav as $product):
-        ?>
+      ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
             <a href="single-product.html">

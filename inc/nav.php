@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 // session_start(); 
 ?>
@@ -15,6 +16,8 @@ $cat= new DatabaseCrud();
 $category=$cat->read("category")
 ?>
 
+=======
+>>>>>>> e258a9d6803211597fe806d75d37a1214ff21ca6
 
 <div>
   <div class="header-container fixed-top border-bottom">

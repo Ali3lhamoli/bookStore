@@ -1,5 +1,10 @@
 <?php
 session_start();
+require_once 'classes/DatabaseConnection.php';
+require_once 'classes/DatabaseCrud.php';
+$crud = new DatabaseCrud();
+
+
 $config = require_once 'config.php';
 require_once 'core/functions.php';
 
@@ -59,11 +64,22 @@ if (isset($_GET['page'])) {
         case 'track-order':
             require_once 'views/track-order.php';
             break;
+        case 'track-order-controller':
+            require_once 'controllers/track-order.php';
+            break;
         case 'logout':
             require_once 'controllers/logout.php';
             break;
         case 'UnsetCart':
             require_once 'controllers/UnsetCart.php';
+        case 'change_account_details':
+            require_once 'controllers/change_account_details.php';
+            break;
+        case 'change_password':
+            require_once 'controllers/change_password.php';
+            break;
+        case 'contact_us':
+            require_once 'controllers/contact_us.php';
             break;
         default:
             require_once 'views/404.php';
@@ -71,3 +87,5 @@ if (isset($_GET['page'])) {
 } else {
     require_once 'views/home.php';
 }
+
+mysqli_close(DatabaseConnection::getInstance()->getConnection());
