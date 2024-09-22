@@ -8,11 +8,16 @@ require_once 'classes/DatabaseConnection.php';
 
 
 
-$id = $_GET['id'];
+// $id = $_GET['id'];
 
 $crud = new DatabaseCrud();
 // DatabaseConnection::getInstance()->selectDatabase();
-$result = $crud->read('books', "`id` = $id");
+if(isset($_GET['id'])){
+$id =$_GET['id'];
+  $result = $crud->read('books', "`id` = $id");
+}else{
+  echo "";
+}
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');
 $Q = $crud->read('description_single_products');
@@ -67,7 +72,9 @@ $Q = $crud->read('description_single_products');
               href="<?php echo $config['base_url'] ?>controllers/add_to_cart.php?id=<?= $item['id'] ?>">اضافه الي السلة</a>
           </div>
           <div class="single-product__favourite d-flex align-items-center gap-2 mb-4">
+            <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $item['id'] ?>">
             <i class="fa-regular fa-heart"></i>
+            </a>
             اضافة للمفضلة
           </div>
         </div>

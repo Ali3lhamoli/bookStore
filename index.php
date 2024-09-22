@@ -81,6 +81,9 @@ if (isset($_GET['page'])) {
         case 'contact_us':
             require_once 'controllers/contact_us.php';
             break;
+        case 'search':
+            require_once 'views/search.php';
+            break;
         default:
             require_once 'views/404.php';
     }

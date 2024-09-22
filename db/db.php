@@ -33,6 +33,7 @@ $tables = [
         nameCategory VARCHAR(255) NOT NULL
        
     )",
+ 
    
 
     // Books table 

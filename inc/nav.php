@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 // session_start(); 
 ?>
@@ -11,13 +10,11 @@ require_once "function.php";
 
 $crud = new DatabaseCrud();
 $cat= new DatabaseCrud();
-
+$carts=$_SESSION['cart'];
 
 $category=$cat->read("category")
 ?>
 
-=======
->>>>>>> e258a9d6803211597fe806d75d37a1214ff21ca6
 
 <div>
   <div class="header-container fixed-top border-bottom">
@@ -56,12 +53,16 @@ $category=$cat->read("category")
               <img class="h-100" src="assets/images/logo.png" alt="">
             </a>
           </div>
+          <form action="<?= $config['base_url']; ?>controllers/search.php" class="col-6">
           <div class="nav__search w-100">
-            <input class="nav__search-input w-100" type="search" placeholder="أبحث هنا عن اي شئ تريده...">
-            <span class="nav__search-icon">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
-          </div>
+
+<input class="nav__search-input w-100" type="search" name="query" placeholder="أبحث هنا عن اي شئ تريده...">
+<span class="nav__search-icon">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</span>
+</div>
+          </form>
+         
           <ul class="nav__links gap-3 list-unstyled d-none d-lg-flex m-0">
             <li class="nav__link nav__link-user">
               <a class="d-flex align-items-center gap-2">
@@ -343,7 +344,12 @@ $category=$cat->read("category")
  
             <div class="d-flex justify-content-between">
               <p class="fw-bolder">المجموع:</p>
-              <?php  //$totalPrice  =           total($cart)   ?>
+<?php    $totalPrice =calculateTotalPriceA($carts);
+
+$_SESSION['totalP']=$totalPrice;
+?>
+
+              <?php     print_r($_SESSION['totalP']) //$totalPrice  =           total($cart)   ?>
            </p>    جنيه</p>
         
             </div>
