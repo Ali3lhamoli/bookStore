@@ -76,6 +76,9 @@ if (isset($_GET['page'])) {
         case 'change_password':
             require_once 'controllers/change_password.php';
             break;
+        case 'contact_us':
+            require_once 'controllers/contact_us.php';
+            break;
         default:
             require_once 'views/404.php';
     }
