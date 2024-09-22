@@ -19,4 +19,7 @@ addToCart($data, $id);
 
 
 // unset($_SESSION['cart']);
-// redirect("index.php?page=single-product");
+// echo "<pre>"; 
+//  print_r($_SESSION['cart']);
+//  echo "</pre>";
+redirect("index.php?page=single-product");

@@ -33,7 +33,7 @@ $Q = $crud->read('description_single_products');
     ?>
     <section class="section-container my-5 pt-5 d-md-flex gap-5">
 
-
+ 
       <div class="single-product__img w-100" id="main-img">
         <img src=" <?= $item['image'] ?>" alt="">
       </div>

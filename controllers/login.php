@@ -26,7 +26,7 @@ if(!empty($_SESSION['errors'])){
 
 $where = "`email` = '$email'";
 
-$filed= "email ,  password , name";
+$filed= "email ,  password , name,id";
     $user= $git->read('users',$where,$filed);
 
 

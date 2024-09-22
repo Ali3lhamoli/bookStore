@@ -62,6 +62,9 @@ if (isset($_GET['page'])) {
         case 'logout':
             require_once 'controllers/logout.php';
             break;
+        case 'UnsetCart':
+            require_once 'controllers/UnsetCart.php';
+            break;
         default:
             require_once 'views/404.php';
     }

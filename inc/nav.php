@@ -9,6 +9,10 @@ require_once "classes/DatabaseCrud.php";
 require_once "function.php";
 
 $crud = new DatabaseCrud();
+$cat= new DatabaseCrud();
+
+
+$category=$cat->read("category")
 ?>
 
 
@@ -65,7 +69,8 @@ $crud = new DatabaseCrud();
               <ul class="nav__user-list position-absolute p-0 list-unstyled bg-white">
                 <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=profile">لوحة
                     التحكم</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=orders">الطلبات</a>
+                <li class="nav__link nav__user-link"><a
+                    href="<?= $config['base_url']; ?>index.php?page=orders">الطلبات</a>
                 </li>
                 <li class="nav__link nav__user-link"><a
                     href="<?= $config['base_url']; ?>index.php?page=account_details">تفاصيل الحساب</a></li>
@@ -98,7 +103,14 @@ $crud = new DatabaseCrud();
                 <div class="position-relative">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <div class="nav__link-floating-icon">
-                    0
+                    <?php  if(isset($_SESSION['cart'])):?>
+                      <?php echo  count($_SESSION['cart']) ?>
+                      <?php elseif(!isset($_SESSION['cart'])): ?>
+                        <div class="nav__link-floating-icon">
+
+                        0
+                        </div>
+                        <?php endif ?>
                   </div>
                 </div>
               </a>
@@ -163,25 +175,7 @@ $crud = new DatabaseCrud();
             </span>
           </div>
           <ul class="nav__links gap-3 list-unstyled d-none d-lg-flex m-0">
-            <li class="nav__link nav__link-user">
-              <a class="d-flex align-items-center gap-2">
-                حسابي
-                <i class="fa-regular fa-user"></i>
-                <i class="fa-solid fa-chevron-down fa-2xs"></i>
-              </a>
-              <ul class="nav__user-list position-absolute p-0 list-unstyled bg-white">
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=profile">لوحة
-                    التحكم</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=orders">الطلبات</a>
-                </li>
-                <li class="nav__link nav__user-link"><a
-                    href="<?= $config['base_url']; ?>index.php?page=account_details">تفاصيل الحساب</a></li>
-                <li class="nav__link nav__user-link"><a
-                    href="<?= $config['base_url']; ?>index.php?page=favourites">المفضلة</a></li>
-                <li class="nav__link nav__user-link"><a href="<?= $config['base_url']; ?>index.php?page=logout">تسجيل
-                    الخروج</a></li>
-              </ul>
-            </li>
+        
             <li class="nav__link">
               <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=account">
                 تسجيل الدخول
@@ -205,7 +199,14 @@ $crud = new DatabaseCrud();
                 <div class="position-relative">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <div class="nav__link-floating-icon">
-                    0
+                    <?php  if(isset($_SESSION['cart'])):?>
+                      <?php echo  count($_SESSION['cart']) ?>
+                      <?php elseif(!isset($_SESSION['cart'])): ?>
+                        <div class="nav__link-floating-icon">
+
+                        0
+                        </div>
+                        <?php endif ?>
                   </div>
                 </div>
               </a>
@@ -238,6 +239,8 @@ $crud = new DatabaseCrud();
                 href="<?= $config['base_url']; ?>index.php?page=favourites">
                 <i class="fa-regular fa-heart"></i>
                 المفضلة
+
+
               </a>
             </li>
             <li class="nav-mobile__link d-flex align-items-center flex-column gap-1" data-bs-toggle="offcanvas"
@@ -262,14 +265,27 @@ $crud = new DatabaseCrud();
         <div class="nav__side-logo mb-2">
           <img class="w-100" src="assets/images/logo.png" alt="">
         </div>
+
+
+
+
+
         <ul class="nav__list list-unstyled">
-          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">جميع
+          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop"
+              class="py-3">جميع
               المنتجات</a></li>
-          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">كتب
-              عربيه</a></li>
-          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop" class="py-3">كتب
-              انجليزية</a></li>
+        <?php foreach($category as $cate): ?>
+
+          <li class="nav__link nav__side-link"><a href="<?= $config['base_url']; ?>index.php?page=shop&type=<?=$cate['id']  ?>" class="py-3">
+            <?php echo $cate['nameCategory'] ?>  </a></li>
+        <?php endforeach ?>
+
+         
         </ul>
+
+
+
+        
       </div>
     </div>
 
@@ -286,13 +302,7 @@ $crud = new DatabaseCrud();
           <div class="cart-products">
             <?php foreach ($_SESSION['cart'] as $id => $cart): ?>
 
-              <?php
-              // echo $id
-              $result = $crud->read('books', "`id` = $id"); ?>
-
-
-
-
+              <?php  $result = $crud->read('books', "`id` = $id"); ?>
               <?php foreach ($result as $product): ?>
                 <ul class="nav__list list-unstyled">
 
@@ -303,19 +313,21 @@ $crud = new DatabaseCrud();
                       </div>
                       <div>
                         <p class="cart-products__name m-0 fw-bolder"><?php $product['title'] ?></p>
-                        <h6><?= $cart['price'] . "جنيه" . $cart['qty'] . "X" ?></h6>
-                        <?php ($totalPrice = calculateTotalPriceA($cart)) ?>
-                        <?php ($totalPriceP = calculateTotalPriceP($_SESSION['cart'])) ?>
-                        <?php $_SESSION['totalP'] = $totalPrice; ?>
-                        <?php $_SESSION['totalBeforDis'] = $totalPriceP; ?>
-
+                     
+                        <h6><?php $product['discount_price'] 
+                        ? print_r($product['discount_price']) .  print_r("X") .  print_r($cart['qty'])  :
+                        
+                        
+                        $product['price'] . "جنيه" .   print_r( $cart['qty']) .print_r(  " X") ?></h6>
+    
                       </div>
                     </div>
                     <div class="cart-products__img">
                       <img class="w-100" src="<?php echo $product['image'] ?>" alt="">
                     </div>
                   </li>
-
+            
+ 
 
 
                 </ul>
@@ -325,24 +337,21 @@ $crud = new DatabaseCrud();
 
             <?php endforeach ?>
 
-
-
+ 
             <div class="d-flex justify-content-between">
               <p class="fw-bolder">المجموع:</p>
-              <p><?php echo $totalPriceP ?> جنيه</p>
-              <!-- <p><?php $totalPrice ?> جنيه</p> -->
+              <?php  //$totalPrice  =           total($cart)   ?>
+           </p>    جنيه</p>
+        
             </div>
           </div>
-          <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3 bg-success btn btn-primary"
-            href="<?= $config['base_url']; ?>index.php?page=checkout">اتمام الطلب</a>
-          <a class="nav__cart-btn text-center w-100 py-2 px-3 bg-transparent btn btn-primary"
-            href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
+          <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3 bg-success btn btn-primary"  href="<?= $config['base_url']; ?>index.php?page=checkout">اتمام الطلب</a>
+          <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3  btn btn-danger" href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
         </div>
       <?php elseif (!isset($_SESSION['cart'])): ?>
         <p>لا توجد منتجات في سلة المشتريات.</p>
-
-        <a class="nav__cart-btn text-center w-100 py-2 px-3 bg-transparent btn btn-danger"
-          href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
+        <!--     background-color: #fe4040 !important; -->
+        <a class="nav__cart-btn text-center text-white w-100 border-0 mb-3 py-2 px-3 bg-success btn btn-primary" href="<?= $config['base_url']; ?>index.php?page=shop">تابع التسوق</a>
       <?php endif ?>
     </div>
   </div>

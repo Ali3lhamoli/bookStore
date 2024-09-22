@@ -5,23 +5,37 @@ require_once '../classes/DatabaseCrud.php';
 
 $crud = new DatabaseCrud();
 
-
+/********           LOCK ROW NUMBER  26                   */
 
 // insert data into slider table
 
-$insertData = [
-    'image' => '01.png'
-];
-$insertId = $crud->create('homeslider', $insertData);
+// $insertData = [
+//     'image' => '01.png'
+// ];
+// $insertId = $crud->create('homeslider', $insertData);
 
-echo "New record created successfully in slider table. $insertId <br>";
+// echo "New record created successfully in slider table. $insertId <br>";
+require_once "../classes/DatabaseCrud.php";
+$columns = [
+    'id_cate ' => 'INT ',
+ 
+];
+$crud->alterTableAddColumn('books', $columns);
+
+
+"ALTER TABLE `books` ADD FOREIGN KEY (`id_cate`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
+
+
+ 
+
+
 
 
 // alter column to books table
+// $var=['english','arabic'];
 // $columns = [
-//     'number_of_pages' => 'INT',
-//     'discount' => 'DECIMAL(10, 2)',
-//     'image' => 'VARCHAR(255)'
+//     'type' => $var
+     
 // ];
 // $crud->alterTableAddColumn('books', $columns);
 
