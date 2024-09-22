@@ -126,7 +126,7 @@ if (isset($_GET['type'])) {
             <span class="product__price product__price--old">
               <?= $item['price'] ?>جنيه
             </span>
-            <span class="product__price"><?= $item['offer']?>جنيه </span>
+            <span class="product__price"><?= $item['discount_price']?>جنيه </span>
           </div>
         </div>
       <?php endforeach; ?>
