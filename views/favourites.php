@@ -6,7 +6,7 @@ require_once 'inc/nav.php';
 $sub_section = 'المفضلة';
 require_once 'inc/subSectionFromMain.php';
 
-$user_id = $_SESSION['client'][3];
+$user_id = $_SESSION['client']['id'];
 
 $conn = DatabaseConnection::getInstance()->getConnection();
 

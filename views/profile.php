@@ -14,8 +14,8 @@ require_once 'inc/sidebar.php';
 <div class="profile__left mt-4 mt-md-0 w-100">
   <div class="profile__tab-content active">
     <p class="mb-5">
-      مرحبا <span class="fw-bolder"><?= $_SESSION['client'][0] ?></span> (لست
-      <span class="fw-bolder"><?= $_SESSION['client'][0] ?></span>?
+      مرحبا <span class="fw-bolder"><?= $_SESSION['client']['name'] ?></span> (لست
+      <span class="fw-bolder"><?= $_SESSION['client']['name'] ?></span>?
       <a class="text-danger" href="<?= $config['base_url']; ?>index.php?page=logout">تسجيل الخروج</a>)
     </p>
 

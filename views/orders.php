@@ -8,7 +8,7 @@ require_once 'inc/nav.php';
 $sub_section = 'الطلبات';
 require_once 'inc/subSectionFromMain.php';
 
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['client']['id'] ?? null;
 
 if (!$user_id) {
     header("Location: " . $config['base_url'] . "index.php?page=login");
