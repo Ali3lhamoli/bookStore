@@ -11,36 +11,7 @@ $crud = new DatabaseCrud();
 // insert data into slider table
 
 // $insertData = [
-<<<<<<< HEAD
-//     'image' => '01.png'
-// ];
-// $insertId = $crud->create('homeslider', $insertData);
-
-// echo "New record created successfully in slider table. $insertId <br>";
-require_once "../classes/DatabaseCrud.php";
-$columns = [
-    'id_cate ' => 'INT ',
- 
-];
-$crud->alterTableAddColumn('books', $columns);
-
-
-"ALTER TABLE `books` ADD FOREIGN KEY (`id_cate`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
-
-
- 
-
-
-
-
-// alter column to books table
-// $var=['english','arabic'];
-// $columns = [
-//     'type' => $var
-     
-=======
 //     'image' => '03.png'
->>>>>>> e258a9d6803211597fe806d75d37a1214ff21ca6
 // ];
 // $insertId = $crud->create('homeslider', $insertData);
 

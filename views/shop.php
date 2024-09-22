@@ -126,7 +126,7 @@ if (isset($_GET['type'])) {
             <span class="product__price product__price--old">
               <?= $item['price'] ?>جنيه
             </span>
-            <span class="product__price"><?= $item['offer']?>جنيه </span>
+            <span class="product__price"><?= $item['discount_price']?>جنيه </span>
           </div>
         </div>
       <?php endforeach; ?>
@@ -134,12 +134,53 @@ if (isset($_GET['type'])) {
 
       <div
         class="products__pagination mb-5 d-flex justify-content-center gap-2">
-        <span class="pagination__btn rounded-1 pagination__btn--next"><i class="fa-solid fa-arrow-right-long"></i></span>
-        <span class="pagination__btn rounded-1 active">1</span>
-        <span class="pagination__btn rounded-1">2</span>
+        <?php if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {?>
+<span class="pagination__btn rounded-1 pagination__btn--next active ">
+    <a href="<?php echo $config['base_url']; ?>index.php?page=shop&page-nr=<?php echo $_GET['page-nr'] - 1 ?>">
+  <i class="fa-solid fa-arrow-right-long"></i>
+</a>
+<?php } else { ?>
+                            <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark"
+                                href="#">  <i class="fa-solid fa-arrow-right-long"></i></a>   <?php
+                        }
+                        ?>
+
+
+
+</span>
+        <?php for ($counter = 1; $counter <= $pages; $counter++) {    ?>
+        <span class="pagination__btn rounded-1 active">
+            <a  class="pagination__btn rounded-1" href="<?php echo $config['base_url']; ?>index.php?page=shop&page-nr=<?php echo $counter ?>"><?php echo $counter ?></a>
+          </span>
+          <?php } ?>
+        <!-- <span class="pagination__btn rounded-1">2</span>
         <span class="pagination__btn rounded-1">3</span>
-        <span class="pagination__btn rounded-1">4</span>
-        <span class="pagination__btn rounded-1 pagination__btn--prev"><i class="fa-solid fa-arrow-left-long"></i></span>
+        <span class="pagination__btn rounded-1">4</span> -->
+        <!-- <span class="pagination__btn rounded-1 pagination__btn--prev"><i class="fa-solid fa-arrow-left-long"></i></span> -->
+        <span class="pagination__btn rounded-1 active">
+                        <?php if (!isset($_GET['page-nr'])) {
+                        ?> 
+ <a href="<?php echo $config['base_url']; ?>index.php?page=shop&page-nr=2" class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark">Next</a>
+                          <?php
+
+                        } else {
+                    if ($_GET['page-nr'] >= $pages) {
+                           ?>
+                         <a href="#" class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark">Next</a>
+                          <?php
+                            } else {
+                                ?>
+
+                                <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark"
+                                    href="<?php echo $config['base_url']; ?>index.php?page=shop&page-nr=2&page-nr=<?php echo $_GET['page-nr'] + 1 ?>">Next</a>
+                                <?php
+
+                            }
+                        }
+                        ?>
+                    </span>
+
+                    <?php ?>
       </div>
     </div>
   </div>
