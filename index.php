@@ -70,6 +70,8 @@ if (isset($_GET['page'])) {
         case 'logout':
             require_once 'controllers/logout.php';
             break;
+        case 'UnsetCart':
+            require_once 'controllers/UnsetCart.php';
         case 'change_account_details':
             require_once 'controllers/change_account_details.php';
             break;

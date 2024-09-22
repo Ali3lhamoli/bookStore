@@ -8,9 +8,9 @@ require_once 'inc/subSectionFromMain.php';
 require_once 'function.php';
 
 
-// echo "<pre>";
-// print_r( $_SESSION['auth']);
-// echo "</pre>";
+echo "<pre>";
+print_r( $_SESSION['errors']);
+echo "</pre>";
 
 ?>
 
@@ -42,6 +42,9 @@ require_once 'function.php';
 
     <div class="account__register w-100">
       <form class="mb-5" action="./controllers/register.php" method="POST">
+
+
+
         <div class="input-group rounded-1 mb-3">
           <input type="text" class="form-control p-3" placeholder="الاسم كامل" name="name" aria-label="Username"
             aria-describedby="basic-addon1" <?php if(isset($_SESSION['name'])): ?>
@@ -56,13 +59,26 @@ require_once 'function.php';
         <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['name'] ?></h4>
 
         <?php  endif ?>
+        
+
+
+
         <div class="input-group rounded-1 mb-3">
-          <input type="text" class="form-control p-3" placeholder="البريد الالكتروني" name="email" aria-label="Email"
-            aria-describedby="basic-addon1" />
+
+          <input type="text" class="form-control p-3" placeholder="البريد الالكتروني" name="email" aria-label="Email" aria-describedby="basic-addon1" 
+            <?php if(isset($_SESSION['email'])): ?> value=" <?php $_SESSION['email'] ?>" <?php endif ?> />
+
           <span class="input-group-text login__input-icon" id="basic-addon1">
             <i class="fa-solid fa-envelope"></i>
           </span>
+
         </div>
+        <?php  if(isset($_SESSION['errors']['email'])): ?>
+        <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['email'] ?></h4>
+
+        <?php  endif ?>
+
+        
         <div class="input-group rounded-1 mb-3">
           <input type="password" class="form-control p-3" placeholder="كلمة السر" name="password" aria-label="Password"
             aria-describedby="basic-addon1" />
@@ -70,6 +86,11 @@ require_once 'function.php';
             <i class="fa-solid fa-key"></i>
           </span>
         </div>
+
+        <?php  if(isset($_SESSION['errors']['password'])): ?>
+        <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['password'] ?></h4>
+
+        <?php  endif ?>
 
         <button class="text-center fs-6 py-2 w-100 bg-black text-white border-0 rounded-1">
           حساب جديد

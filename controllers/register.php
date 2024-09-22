@@ -30,7 +30,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == "POST") {
     $crud = new DatabaseCrud();
 
     if (!empty($_SESSION['errors'])) {
-    //    redirect("index.php?page=account");
+       redirect("index.php?page=account");
 
     }elseif(empty($_SESSION['errors'])){
 

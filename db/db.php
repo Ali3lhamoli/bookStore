@@ -28,6 +28,12 @@ $tables = [
         password VARCHAR(255) NOT NULL,
         role ENUM('customer', 'admin') NOT NULL DEFAULT 'customer'
     )",
+    "CREATE TABLE IF NOT EXISTS category (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nameCategory VARCHAR(255) NOT NULL
+       
+    )",
+   
 
     // Books table 
     "CREATE TABLE IF NOT EXISTS books (
@@ -40,7 +46,7 @@ $tables = [
         stock INT NOT NULL DEFAULT 0,
         description TEXT,
         image VARCHAR(255) NOT NULL,
-        category VARCHAR(255),
+        category int,
         rating DECIMAL(2, 1) DEFAULT NULL, 
         purchases INT DEFAULT 0,
         offer INT DEFAULT NULL,
@@ -119,11 +125,7 @@ $tables = [
         subservice VARCHAR(50)
     )",
 
-    // Category table
-    "CREATE TABLE IF NOT EXISTS category (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        image VARCHAR(250)
-    )",
+ 
 
     // Landing Page table
     "CREATE TABLE IF NOT EXISTS landingPage (

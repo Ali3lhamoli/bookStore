@@ -21,17 +21,41 @@ function intialCart()
 function calculateTotalPriceA($cart)
 {
   $total = 0;
-
-  $total += $cart['price'] * $cart['qty'];
-
+  foreach ($cart as $item) {
+    $total += $item['price'] * $item['qty'];
+  }
   return $total;
 }
-function calculateTotalPriceP($items)
+function calculateTotalPriceP($cart)
+{
+  $total = 0;
+  foreach ($cart as $item) {
+    $total += $item['mony'] * $item['qty'];
+  }
+  return $total;
+}
+function getProductDetailsPagenation($table_name,$start,$last,$connection) 
+{
+
+
+ 
+  $sql = "SELECT  * from `$table_name`  LIMIT $start,$last";
+
+  return (mysqli_query($connection, $sql));
+}
+function calculateTotalPriceC($items,$qty )
 {
   $total = 0;
   foreach ($items as $item) {
-    $total += $item['mony'] * $item['qty'];
-  }
+   
+    
+    if(isset($item['discount_price'])){
+     $total += $item['discount_price'] * $qty;
+    }else{
+      $total += $item['price'] * $qty;
+    }
+  
+}
   return $total;
 }
 // function calculateTotalPriceP($product,$item)
