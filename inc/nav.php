@@ -10,7 +10,7 @@ require_once "function.php";
 
 $crud = new DatabaseCrud();
 $cat= new DatabaseCrud();
-
+$carts=$_SESSION['cart'];
 
 $category=$cat->read("category")
 ?>
@@ -344,7 +344,12 @@ $category=$cat->read("category")
  
             <div class="d-flex justify-content-between">
               <p class="fw-bolder">المجموع:</p>
-              <?php  //$totalPrice  =           total($cart)   ?>
+<?php    $totalPrice =calculateTotalPriceA($carts);
+
+$_SESSION['totalP']=$totalPrice;
+?>
+
+              <?php     print_r($_SESSION['totalP']) //$totalPrice  =           total($cart)   ?>
            </p>    جنيه</p>
         
             </div>
