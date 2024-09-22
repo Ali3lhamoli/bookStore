@@ -6,59 +6,21 @@ require_once 'inc/nav.php';
 $sub_section = 'من نحن';
 require_once 'inc/subSectionFromMain.php';
 
+$about = $crud->read('aboutus');
+
 ?>
 
-
-<section class="section-container d-flex align-items-center py-4">
+<?php foreach($about as $section): ?>
+<section class="section-container d-flex align-items-center py-4<?= $section['id']%2==0 ? ' text-white bg-black': null ?>">
   <div class="about__img text-center w-50">
-    <img class="w-100" src="assets/images/logo.png" alt="" />
+    <img class="w-100" src="<?= $config['base_url']; ?>assets/images/<?= $section['image'] ?>" alt="" />
   </div>
   <div class="w-50">
-    <h4 class="fw-bolder mb-4">من هي شركة Coding arabic</h4>
-    <p class="m-0">
-      شركتنا هي أكبر شركة متخصصة لبيع الاحذية أونلاين و توصيلها حتي
-      المنزل… ونوفر للعميل تجربة المنتج قبل الاستلام وبدايتنا كانت بصفحة
-      علي الفيسبوك عليها أكثر من مليون مشترك..
-    </p>
-    <p>وهدفنا هو الوصول لكل بيت في مصر و توفير الخدمات له.</p>
+    <h4 class="fw-bolder m-4"><?= $section['title'] ?></h4>
+    <p class="m-2"><?= $section['description'] ?></p>
   </div>
 </section>
-
-<section class="text-white bg-black">
-  <div class="section-container py-5">
-    <h4 class="fw-bolder mb-4">ما هي رؤية شركة Coding arabic</h4>
-    <p class="m-0">
-      رؤيتنا هي أن نكون الشركة الرائدة في مجال بيع الأحذية في مصر، وأن
-      نوفر لعملائنا أفضل الأحذية ذات الجودة العالية والأسعار المعقولة.
-    </p>
-    <p class="m-0">
-      لدينا تشكيلة واسعة من الأحذية، بما في ذلك الأحذية الرياضية، والأحذية
-      الرسمية، والأحذية الكاجوال، والأحذية الطبية، وأكثر من ذلك. نحرص على
-      أن تكون جميع أحذيتنا مصنوعة من مواد عالية الجودة، وأن تكون مريحة
-      وأنيقة في نفس الوقت.
-    </p>
-  </div>
-</section>
-
-<section class="section-container d-flex align-items-center py-5">
-  <div class="w-50">
-    <h4 class="fw-bolder mb-4">هدف شركة Coding arabic</h4>
-    <p class="m-0">
-      نحن نؤمن بأن الأحذية هي جزء مهم من شخصية الفرد، لذلك هدفنا هو أن
-      نوفر لعملائنا أفضل تجربة تسوق ممكنة، وأن نجعل من عملية شراء الأحذية
-      تجربة ممتعة وسهلة.
-    </p>
-    <p>
-      ونسعى جاهدين لتحقيق رؤيتنا وهدفنا من خلال تقديم مجموعة واسعة من
-      الأحذية ذات الجودة العالية والأسعار المعقولة، وتوفير خدمة عملاء
-      ممتازة.
-    </p>
-  </div>
-  <div class="about__img text-end w-50">
-    <img class="w-100" src="assets/images/about-2.png" alt="" />
-  </div>
-</section>
-
+<?php endforeach; ?>
 <section class="section-container py-5">
   <h4 class="text-center fw-bolder mb-4">
     مميزات الشراء من Coding arabic

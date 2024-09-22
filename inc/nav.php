@@ -1,16 +1,3 @@
-<?php
-// session_start(); 
-?>
-
-<?php
-//  require_once "../classes/DatabaseConnection.php";
-require_once "classes/DatabaseConnection.php";
-require_once "classes/DatabaseCrud.php";
-require_once "function.php";
-
-$crud = new DatabaseCrud();
-?>
-
 
 <div>
   <div class="header-container fixed-top border-bottom">

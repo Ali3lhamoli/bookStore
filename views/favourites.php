@@ -10,13 +10,18 @@ $user_id = $_SESSION['client'][3];
 
 $conn = DatabaseConnection::getInstance()->getConnection();
 
-$favorite_query = "
-    SELECT books.title, books.price, books.discount_price, books.stock, favouriets.created_at 
-    FROM favouriets 
-    INNER JOIN books ON favouriets.book_id = books.id 
-    WHERE favouriets.user_id = '$user_id'";
+$favorite = "SELECT   
+                `favouriets`.`created_at`,
+                `books`.`id`,
+                `books`.`title`,
+                `books`.`price`,
+                `books`.`discount_price`,
+                `books`.`image`,
+                `books`.`stock` FROM `favouriets` INNER JOIN `books` 
+             ON `favouriets`.`book_id` = `books`.`id` 
+             WHERE `favouriets`.`user_id` = '$user_id'";
 
-$result = mysqli_query($conn, $favorite_query);
+$result = mysqli_query($conn, $favorite);
 
 $favorite_books = array();
 while ($row = mysqli_fetch_assoc($result)) {
@@ -46,15 +51,15 @@ while ($row = mysqli_fetch_assoc($result)) {
               </span>
             </td>
             <td class="d-block d-md-table-cell favourites__img">
-              <img src="assets/images/product-1.webp" alt="" />
+              <img src="<?= $config['base_url']; ?>assets/images/books/<?= $book['image']; ?> " alt="" />
             </td>
             <td class="d-block d-md-table-cell">
-              <a href=""><?= $book['title'] ?></a>
+            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?= $book['id']; ?>"><?= $book['title'] ?></a>
             </td>
             <td class="d-block d-md-table-cell">
               <span class="product__price product__price--old"><?= $book['price'] ?></span>
               <span class="product__price">
-                <?= $book['discount_price'] ? $book['price'] - $book['discount_price'] : $book['price'] ?>
+                <?= $book['discount_price'] ? $book['discount_price'] : $book['price'] ?>
               </span>
             </td>
             <td class="d-block d-md-table-cell"><?= date('d-m-Y', strtotime($book['created_at'])) ?></td>

@@ -25,7 +25,7 @@ if(empty($current_password) || empty($new_password) || empty($confirm_password))
         $data = ['password'=>$new_hash_password];
         $update = $crud->update('users',$data,"password = '$current_password' AND email = '$old_email'");
         if($update > 0 ){
-            $_SESSION['user']['password'] = $new_password;
+            $_SESSION['client']['2'] = $new_password;
             $_SESSION['change_det_success']['password'] = 'password changed successfully';    
         }else{
             $_SESSION['change_det_errors']['password'] = 'error in changing password please try again later';

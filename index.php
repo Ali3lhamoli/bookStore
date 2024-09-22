@@ -1,5 +1,5 @@
 <?php
-session_start();session_start();
+session_start();
 require_once 'classes/DatabaseConnection.php';
 require_once 'classes/DatabaseCrud.php';
 $crud = new DatabaseCrud();
@@ -75,6 +75,9 @@ if (isset($_GET['page'])) {
             break;
         case 'change_password':
             require_once 'controllers/change_password.php';
+            break;
+        case 'contact_us':
+            require_once 'controllers/contact_us.php';
             break;
         default:
             require_once 'views/404.php';

@@ -135,23 +135,10 @@ $tables = [
     "CREATE TABLE IF NOT EXISTS aboutus (
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(200),
-        logo VARCHAR(250),
         title VARCHAR(50),
-        subTitle VARCHAR(50),
-        section_1 VARCHAR(50),
-        section_1_2 VARCHAR(200),
-        section_2 VARCHAR(50),
-        section_2_2 VARCHAR(200),
-        image_2 VARCHAR(250)
+        description VARCHAR(200)
     )",
 
-    // Contact Us table (fixed duplicate 'image' column)
-    "CREATE TABLE IF NOT EXISTS contactus (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        image VARCHAR(200),
-        title VARCHAR(50),
-        subTitle VARCHAR(250)
-    )",
 
     // Refund Policy table (fixed duplicate 'image' column)
     "CREATE TABLE IF NOT EXISTS refundpolicy (
@@ -183,6 +170,26 @@ $tables = [
     id INT AUTO_INCREMENT PRIMARY KEY,
     Q VARCHAR(100),
     Ansare VARCHAR(250)
+    )",
+
+    // Branches table
+    "CREATE TABLE IF NOT EXISTS branches (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `branch` VARCHAR(50),
+        `address` VARCHAR(250),
+        `phone` VARCHAR (20),
+        `brief_branch` VARCHAR(50)
+    )",
+
+    // Checkout table
+    "CREATE TABLE IF NOT EXISTS contactus (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        couse ENUM('اخرى','استفسار', 'استبدال', 'استرجاع', 'استعجال الاوردر') NOT NULL,
+        phone VARCHAR(20) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        massege TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )"
 ];
 
