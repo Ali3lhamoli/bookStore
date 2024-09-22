@@ -8,28 +8,37 @@ require_once 'classes/DatabaseConnection.php';
 
 
 
-$id = $_GET['id'];
-echo ($id);
+// $id = $_GET['id'];
+
 $crud = new DatabaseCrud();
-DatabaseConnection::getInstance()->selectDatabase();
-$result = $crud->read('books', "`id` = $id");
+// DatabaseConnection::getInstance()->selectDatabase();
+if(isset($_GET['id'])){
+$id =$_GET['id'];
+  $result = $crud->read('books', "`id` = $id");
+}else{
+  echo "";
+}
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');
 $Q = $crud->read('description_single_products');
 
 
 ?>
-
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
 
 
 <main>
   <!-- Product details Start -->
   <?php
   foreach ($result as $item):
-    ?>
+  ?>
     <section class="section-container my-5 pt-5 d-md-flex gap-5">
 
-
+ 
       <div class="single-product__img w-100" id="main-img">
         <img src=" <?= $item['image'] ?>" alt="">
       </div>
@@ -39,12 +48,17 @@ $Q = $crud->read('description_single_products');
           <div class="product__author"><?= $item['author'] ?></div>
           <div class="product__author"></div>
           <div class="product__price mb-3 text-center d-flex gap-2">
-            <span class="product__price product__price--old fs-6 ">
-              <?= $item['offer'] ?> جنيه
-            </span>
-            <span class="product__price fs-5">
-              <?= $item['price'] ?> جنيه
-            </span>
+            <?php if (isset($item['offer'])): ?>
+              <h4 class="mr-1">$
+                <?= $item['offer'] ?>
+              </h4>
+              <span class="strike-text text-decoration-line-through">
+                $<?= $item['price'] ?>
+              </span>
+            <?php else: ?>
+              <h4 class="mr-1">$<?= $item['price'] ?></h4>
+            <?php endif; ?>
+
           </div>
           <div class="d-flex w-100 gap-2 mb-3">
             <div class="single-product__quanitity position-relative">
@@ -54,10 +68,13 @@ $Q = $crud->read('description_single_products');
               <button
                 class="single-product__decrease border-0 bg-transparent position-absolute start-0 h-100 px-3">-</button>
             </div>
-            <button class="single-product__add-to-cart primary-button w-100">اضافه الي السلة</button>
+            <a class="single-product__add-to-cart primary-button w-100 text"
+              href="<?php echo $config['base_url'] ?>controllers/add_to_cart.php?id=<?= $item['id'] ?>">اضافه الي السلة</a>
           </div>
           <div class="single-product__favourite d-flex align-items-center gap-2 mb-4">
+            <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $item['id'] ?>">
             <i class="fa-regular fa-heart"></i>
+            </a>
             اضافة للمفضلة
           </div>
         </div>
@@ -73,7 +90,7 @@ $Q = $crud->read('description_single_products');
         </div>
       </div>
     </section>
-    <?php
+  <?php
   endforeach
   ?>
   <!-- Product details End -->
@@ -164,7 +181,7 @@ $Q = $crud->read('description_single_products');
           </div>
         </div>
 
-        <?php
+      <?php
       endforeach
       ?>
     </div>
@@ -181,7 +198,7 @@ $Q = $crud->read('description_single_products');
     <div class="row">
       <?php
       foreach ($fav as $product):
-        ?>
+      ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
             <a href="single-product.html">
@@ -228,7 +245,7 @@ $Q = $crud->read('description_single_products');
     <div class="row">
       <?php
       foreach ($fav as $product):
-        ?>
+      ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
             <a href="single-product.html">

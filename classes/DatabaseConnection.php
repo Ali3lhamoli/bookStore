@@ -23,13 +23,13 @@ class DatabaseConnection
             die("Connection failed: " . $this->connection->connect_error);
         }
 
-        // Select the database after creating the connection
-        $sql = "SHOW DATABASES LIKE $this->dbname";
-        if (!mysqli_query($this->connection, $sql)) {
+        $sql = "SHOW DATABASES LIKE '$this->dbname'";
+        $result = mysqli_query($this->connection, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
             $this->selectDatabase();
         }
     }
-
     // Get the single instance of the class
     public static function getInstance()
     {

@@ -28,6 +28,13 @@ $tables = [
         password VARCHAR(255) NOT NULL,
         role ENUM('customer', 'admin') NOT NULL DEFAULT 'customer'
     )",
+    "CREATE TABLE IF NOT EXISTS category (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nameCategory VARCHAR(255) NOT NULL
+       
+    )",
+ 
+   
 
     // Books table 
     "CREATE TABLE IF NOT EXISTS books (
@@ -40,7 +47,7 @@ $tables = [
         stock INT NOT NULL DEFAULT 0,
         description TEXT,
         image VARCHAR(255) NOT NULL,
-        category VARCHAR(255),
+        category int,
         rating DECIMAL(2, 1) DEFAULT NULL, 
         purchases INT DEFAULT 0,
         offer INT DEFAULT NULL,
@@ -53,7 +60,15 @@ $tables = [
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         total_price DECIMAL(10, 2) NOT NULL,
+        payment_status ENUM('pending', 'paid', 'failed') NOT NULL DEFAULT 'pending',
+        shipping_status ENUM('pending', 'shipped', 'delivered', 'cancelled') NOT NULL DEFAULT 'pending',
         status ENUM('pending', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
+        billing_name VARCHAR(255) NOT NULL,
+        billing_address VARCHAR(255) NOT NULL,
+        billing_city VARCHAR(100) NOT NULL,
+        billing_postal_code VARCHAR(20) NOT NULL,
+        billing_phone VARCHAR(20) NOT NULL,
+        billing_email VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -65,7 +80,10 @@ $tables = [
         order_id INT NOT NULL,
         book_id INT NOT NULL,
         quantity INT NOT NULL,
-        price DECIMAL(10, 2) NOT NULL,
+        unit_price DECIMAL(10, 2) NOT NULL,
+        discount_applied DECIMAL(10, 2) DEFAULT 0,
+        offer_applied INT DEFAULT NULL,
+        total_price DECIMAL(10, 2) NOT NULL,
         FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE ON UPDATE CASCADE
     )",
@@ -74,12 +92,15 @@ $tables = [
     "CREATE TABLE IF NOT EXISTS checkout (
         id INT AUTO_INCREMENT PRIMARY KEY,
         order_id INT NOT NULL,
-        payment_method ENUM('credit_card', 'paypal') NOT NULL,
+        payment_method ENUM('credit_card', 'paypal', 'bank_transfer', 'cash_on_delivery') NOT NULL,
+        transaction_id VARCHAR(255) DEFAULT NULL,
         shipping_address TEXT NOT NULL,
-        payment_status ENUM('pending', 'paid') NOT NULL DEFAULT 'pending',
+        billing_address TEXT DEFAULT NULL,
+        payment_status ENUM('pending', 'paid', 'failed') NOT NULL DEFAULT 'pending',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE
     )",
+
 
     // Siting table
     "CREATE TABLE IF NOT EXISTS siting (
@@ -89,6 +110,15 @@ $tables = [
         link VARCHAR(250)
     )",
 
+    "CREATE TABLE IF NOT EXISTS favouriets (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        book_id INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE ON UPDATE CASCADE
+    )",
+
     // Services table
     "CREATE TABLE IF NOT EXISTS services (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,11 +126,7 @@ $tables = [
         subservice VARCHAR(50)
     )",
 
-    // Category table
-    "CREATE TABLE IF NOT EXISTS category (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        image VARCHAR(250)
-    )",
+ 
 
     // Landing Page table
     "CREATE TABLE IF NOT EXISTS landingPage (
@@ -112,23 +138,10 @@ $tables = [
     "CREATE TABLE IF NOT EXISTS aboutus (
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(200),
-        logo VARCHAR(250),
         title VARCHAR(50),
-        subTitle VARCHAR(50),
-        section_1 VARCHAR(50),
-        section_1_2 VARCHAR(200),
-        section_2 VARCHAR(50),
-        section_2_2 VARCHAR(200),
-        image_2 VARCHAR(250)
+        description VARCHAR(200)
     )",
 
-    // Contact Us table (fixed duplicate 'image' column)
-    "CREATE TABLE IF NOT EXISTS contactus (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        image VARCHAR(200),
-        title VARCHAR(50),
-        subTitle VARCHAR(250)
-    )",
 
     // Refund Policy table (fixed duplicate 'image' column)
     "CREATE TABLE IF NOT EXISTS refundpolicy (
@@ -160,6 +173,26 @@ $tables = [
     id INT AUTO_INCREMENT PRIMARY KEY,
     Q VARCHAR(100),
     Ansare VARCHAR(250)
+    )",
+
+    // Branches table
+    "CREATE TABLE IF NOT EXISTS branches (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `branch` VARCHAR(50),
+        `address` VARCHAR(250),
+        `phone` VARCHAR (20),
+        `brief_branch` VARCHAR(50)
+    )",
+
+    // Checkout table
+    "CREATE TABLE IF NOT EXISTS contactus (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        couse ENUM('اخرى','استفسار', 'استبدال', 'استرجاع', 'استعجال الاوردر') NOT NULL,
+        phone VARCHAR(20) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        massege TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )"
 ];
 
