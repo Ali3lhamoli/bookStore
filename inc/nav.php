@@ -327,7 +327,7 @@ $category=$cat->read("category")
                       </div>
                     </div>
                     <div class="cart-products__img">
-                      <img class="w-100" src="<?php echo $product['image'] ?>" alt="">
+                      <img class="w-100" src="<?= $config['base_url']; ?>assets/images/books/<?php echo $product['image'] ?>" alt="">
                     </div>
                   </li>
             
