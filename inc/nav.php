@@ -95,9 +95,7 @@ $category=$cat->read("category")
                 المفضلة
                 <div class="position-relative">
                   <i class="fa-regular fa-heart"></i>
-                  <div class="nav__link-floating-icon">
-                    0
-                  </div>
+
                 </div>
               </a>
             </li>
