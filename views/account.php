@@ -8,10 +8,7 @@ require_once 'inc/subSectionFromMain.php';
 require_once 'function.php';
 
 
-echo "<pre>";
-print_r( $_SESSION['errors']);
-echo "</pre>";
-
+ 
 ?>
 
 

@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
  
 
 if(!empty($_SESSION['errors'])){
-    redirect("index.php?page=account");
+    redirect("index.php?page=accountLogin");
     
 
 
