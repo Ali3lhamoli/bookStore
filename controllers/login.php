@@ -30,7 +30,7 @@ $filed= "email ,  password , name,id";
     $user= $git->read('users',$where,$filed);
 
 
-
+redirect("index.php?page=home");
     if(empty($user)){
  
 
