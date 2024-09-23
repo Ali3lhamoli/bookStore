@@ -322,7 +322,7 @@ $category=$cat->read("category")
                         <a  href="<?= $config['base_url']; ?>controllers/removeFromCart.php?id=<?=$id ?>" class="cart-products__remove">x</a>
                       </div>
                       <div>
-                        <p class="cart-products__name m-0 fw-bolder"><?php echo $product['title'] ?></p>
+                        <p class="cart-products__name m-0 fw-bolder"><?php $product['title'] ?></p>
                      
                         <h6><?php $product['discount_price'] 
                         ? print_r($product['discount_price']) .  print_r("X") .  print_r($cart['qty'])  :
