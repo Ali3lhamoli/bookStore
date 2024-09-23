@@ -17,13 +17,14 @@ if (isset($_SERVER['REQUEST_METHOD']) == "POST") {
     $password = $_POST['password'];
     
     
-    
+    isEmptyName($name);
+    isEmptyEmail($email);
+    isEmptyPassword($password);
     /*****************************************************************/
     $passwordH = password_hash($password, PASSWORD_DEFAULT);
     
-    isEmptyName($name);
-    isEmptyEmail($email);
-    isEmptyPassword($passwordH);
+    
+ 
     /******--------------------------------------------------------------- */
     /******--------------------------------------------------------------- */
     
@@ -35,8 +36,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == "POST") {
     }elseif(empty($_SESSION['errors'])){
 
 
-$data=
-    ["email"=>$email,"name"=>$name,"password"=>$passwordH];
+$data=["email"=>$email,"name"=>$name,"password"=>$passwordH];
 
 
 $usersAdded = $crud->create('users', $data);
@@ -49,6 +49,4 @@ redirect("index.php?page=home");
 } 
 
  
-echo "<pre>";
-print_r( $_SESSION['users']);
-echo "</pre>";
+ 

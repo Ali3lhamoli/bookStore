@@ -122,7 +122,7 @@ $result = $crud->read('books');
               <!-- title -->
               <td> <?php print_r($product['title']) ?>   </td>
 <!-- price & Qty -->
-<?php   $_SESSION['cart_qty']= [$item['qty'],$item['price']] ?>
+<?php   $_SESSION['cart_qty']= [$item['qty'], $item['discount_price']?? $item['discount_price']::$item['price'] ] ?>
 <td>     
   <div class="product__price text-center d-flex gap-2 flex-wrap">
   <?php if(isset($product['discount_price'])): ?>

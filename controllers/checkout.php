@@ -56,12 +56,13 @@ $id_order = $crud->read('orders'); // Specify your table name
   
 $order_id= $id_order[0];
 //  print_r($order_id['id']);
-print_r($order_id['id']);
+// print_r($order_id['id']);
 
   $book_id= $_SESSION['check']['id'];
     
     $product_qty=$_SESSION['cart_qty'][0];
     $product_price= $_SESSION['cart_qty'][1];
+    // print_r( $_SESSION['cart_qty']) ;
   $order_items= ["order_id"=>$order_id['id'],"book_id"=>$book_id,"quantity"=>$product_qty,"price"=>$product_price];
 
   // print_r($order_items);
