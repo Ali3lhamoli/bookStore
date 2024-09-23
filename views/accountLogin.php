@@ -5,7 +5,7 @@ require_once 'function.php';
 require_once 'inc/header.php';
 require_once 'inc/nav.php';
 
-$sub_section = '2حسابى';
+$sub_section = 'login';
 require_once 'inc/subSectionFromMain.php';
 
 

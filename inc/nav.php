@@ -309,6 +309,11 @@ $category=$cat->read("category")
               <?php  $result = $crud->read('books', "`id` = $id"); ?>
               <?php foreach ($result as $product): ?>
                 <ul class="nav__list list-unstyled">
+                  <?php  
+              
+              $product=$_SESSION['productCheck'];
+                  // print_r($_SESSION['cart'][$id]);
+                  ?>
 
                   <li class="cart-products__item d-flex justify-content-between gap-2">
                     <div class="d-flex gap-2">
@@ -337,7 +342,8 @@ $category=$cat->read("category")
                 </ul>
               <?php endforeach ?>
 
-
+<?php $_SESSION['check']=$_SESSION['productCheck'] ?> 
+ 
 
             <?php endforeach ?>
 
