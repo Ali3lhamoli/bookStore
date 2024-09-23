@@ -41,8 +41,8 @@ $id_User= $_SESSION['client']['id'];
  
   
     $statue='pending';
-      $created_at= $_SESSION['cart']['created_at'];
-      $updated_at= $_SESSION['cart']['updated_at'];
+      $created_at= $_SESSION['check']['created_at'];
+      $updated_at= $_SESSION['check']['updated_at'];
 
     $data= ["user_id"=>$id_User,"total_price"=>$totalPrice,"status"=>$statue,"created_at"=>$created_at,"updated_at"=>$updated_at];
     $addOrder = $crud->create('orders', $data);
@@ -56,13 +56,14 @@ $id_order = $crud->read('orders'); // Specify your table name
   
 $order_id= $id_order[0];
 //  print_r($order_id['id']);
-print_r($order_id['id']);
+// print_r($order_id['id']);
 
-  $book_id= $_SESSION['cart']['id'];
+  $book_id= $_SESSION['check']['id'];
     
     $product_qty=$_SESSION['cart_qty'][0];
     $product_price= $_SESSION['cart_qty'][1];
-  $order_items= ["order_id"=>$order_id['id'],"book_id"=>$book_id,"quantity"=>$product_qty,"price"=>$product_price];
+    // print_r( $_SESSION['cart_qty']) ;
+  $order_items= ["order_id"=>$order_id['id'],"book_id"=>$book_id,"quantity"=>$product_qty,"unit_price"=>$product_price];
 
   // print_r($order_items);
 $addOrder2 = $crud->create('order_items', $order_items);
@@ -72,14 +73,4 @@ redirect("index.php?page=UnsetCart");
  
 
     
-}
- 
- 
-
-
-
-
-
-
-
-}
+}}
