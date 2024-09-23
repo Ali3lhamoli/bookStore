@@ -102,7 +102,7 @@ if (isset($_GET['type'])) {
               <div class="product__img-cont">
                 <img
                   class="product__img w-100 h-100 object-fit-cover"
-                  src=" <?=  $item['image']  ?>"
+                  src="<?= $config['base_url']; ?>assets/images/books/<?= $item['image']  ?>"
                   data-id="white" />
               </div>
             </a>

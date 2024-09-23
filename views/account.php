@@ -7,8 +7,6 @@ $sub_section = 'حسابى';
 require_once 'inc/subSectionFromMain.php';
 require_once 'function.php';
 
-
- 
 ?>
 
 

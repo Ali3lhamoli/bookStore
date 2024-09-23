@@ -95,9 +95,7 @@ $category=$cat->read("category")
                 المفضلة
                 <div class="position-relative">
                   <i class="fa-regular fa-heart"></i>
-                  <div class="nav__link-floating-icon">
-                    0
-                  </div>
+
                 </div>
               </a>
             </li>
@@ -186,6 +184,7 @@ $category=$cat->read("category")
                 <i class="fa-regular fa-user"></i>
               </a>
             </li>
+            <?php if(isset($_SESSION['client'])): ?>
             <li class="nav__link">
               <a class="d-flex align-items-center gap-2" href="<?= $config['base_url']; ?>index.php?page=favourites">
                 المفضلة
@@ -197,6 +196,7 @@ $category=$cat->read("category")
                 </div>
               </a>
             </li>
+            <?php endif; ?>
             <li class="nav__link">
               <a class="d-flex align-items-center gap-2" data-bs-toggle="offcanvas" data-bs-target="#nav__cart">
                 عربة التسوق

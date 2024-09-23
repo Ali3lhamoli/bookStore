@@ -1,7 +1,7 @@
 <?php
 
-$old_name = $_SESSION['client'][0];
-$old_email = $_SESSION['client'][1];
+$old_name = $_SESSION['client']['name'];
+$old_email = $_SESSION['client']['email'];
 
 
 
@@ -21,7 +21,7 @@ if(empty($_POST['name']) && empty($_POST['email'])){
         $data = ['name'=>$name];
         $update = $crud->update('users',$data,"name = '$old_name' AND email = '$old_email'");
         if($update > 0 ){
-            $_SESSION['client'][0] = $name;
+            $_SESSION['client']['name'] = $name;
             $_SESSION['change_det_success']['name'] = 'Name changed successfully.';    
         }else{
             $_SESSION['change_det_errors']['name'] = 'error in changing name please try again later.';
@@ -44,7 +44,7 @@ if(empty($_POST['name']) && empty($_POST['email'])){
         $data = ['email'=>$email];
         $update = $crud->update('users',$data,"name = '$old_name' AND email = '$old_email'");
         if($update > 0){
-            $_SESSION['client'][1] = $email;
+            $_SESSION['client']['email'] = $email;
             $_SESSION['change_det_success']['email'] = 'Email changed successfully.';
         }else{
             $_SESSION['change_det_errors']['email'] = 'error in changing email please try again later.';
@@ -80,8 +80,8 @@ if(empty($_POST['name']) && empty($_POST['email'])){
     if($data == ['name'=>$name , 'email'=>$email]){
         $update = $crud->update('users',$data,"name = '$old_name' AND email = '$old_email'");
         if($update > 0){
-            $_SESSION['client'][1] = $email;
-            $_SESSION['client'][0] = $name;
+            $_SESSION['client']['email'] = $email;
+            $_SESSION['client']['name'] = $name;
             $_SESSION['change_det_success']['email'] = 'Email changed successfully.';
             $_SESSION['change_det_success']['name'] = 'name changed successfully.';
 
