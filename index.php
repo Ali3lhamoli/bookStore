@@ -84,6 +84,9 @@ if (isset($_GET['page'])) {
         case 'search':
             require_once 'views/search.php';
             break;
+        case 'removefav':
+            require_once 'controllers/remove_fav.php';
+            break;
         default:
             require_once 'views/404.php';
     }

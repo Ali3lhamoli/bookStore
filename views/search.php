@@ -39,13 +39,13 @@ require_once "./function.php";
 isset($_SESSION['search']) && !empty($_SESSION['search']) ? $resultsArray = $_SESSION['search'] :"" ?>
 <?php  foreach ($resultsArray as $row):?>
 
-     <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
+     <div class="products__item col-4 col-md-4 col-lg-4 mb-5">
           <div class="product__header mb-3">
-            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?= $res['id'] ?>">
+            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?= $row['id'] ?>">
               <div class="product__img-cont">
                 <img
                   class="product__img w-100 h-100 object-fit-cover"
-                  src=" <?=  $row['image']  ?>"
+                  src="<?= $config['base_url']; ?>assets/images/books/<?= $row['image']; ?>"
                   data-id="white" />
               </div>
             </a>

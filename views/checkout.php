@@ -1,25 +1,31 @@
-<?php
-
-
-require_once 'inc/header.php';
-require_once 'inc/nav.php';
-require_once 'function.php';
-
-$sub_section = 'اتمام الطلب';
-require_once 'inc/subSectionFromMain.php';
-require_once 'validation/validation.php';
-$cart = $_SESSION['cart'];
  
-$crud = new DatabaseCrud();  
-$result = $crud->read('books'); 
- 
-
-?>
 
 
  
  
 
+<?php 
+if(isset($_SESSION['cart']['price'])==0 && isset($_SESSION['client'])==0):?>
+<?php  require_once "function.php";
+redirect("index.php?page=home")
+//  exit(); // تأكد من إنهاء التنفيذ بعد إعادة التوجيه ?>
+
+<?php else: ?>
+<?php 
+  require_once 'inc/header.php';
+  require_once 'inc/nav.php';
+  require_once 'function.php';
+  
+  $sub_section = 'اتمام الطلب';
+  require_once 'inc/subSectionFromMain.php';
+  require_once 'validation/validation.php';
+  // require_once 'validation/validation.php';
+  $cart = $_SESSION['cart'];
+   
+  // $crud = new DatabaseCrud();  
+  $result = $crud->read('books'); 
+   
+  ?>
   <section class="section-container my-5 py-5 d-lg-flex">
   <div class="checkout__form-cont w-50 px-3 mb-5">
     <h4>الفاتورة </h4>
@@ -56,8 +62,8 @@ $result = $crud->read('books');
       <div class="mb-3">
         <label for="last-name">المدينة / المحافظة<span class="required">*</span></label>
         <select class="form__input bg-transparent" name="state" type="text" id="last-name">
-          <option value="">القاهرة</option>
-          <option value="">اسكندرية</option>
+          <option value="cairo">القاهرة</option>
+          <option value="alex">اسكندرية</option>
         </select>
       </div>
       <div class="mb-3">
@@ -122,15 +128,27 @@ $result = $crud->read('books');
               <!-- title -->
               <td> <?php print_r($product['title']) ?>   </td>
 <!-- price & Qty -->
-<?php   $_SESSION['cart_qty']= [$item['qty'],$item['price']] ?>
+<?php   $_SESSION['cart_qty']= [$item['qty'] ] ?>
+
+<?php  $_SESSION['cart_price']= $item['discount_price']? $item['discount_price']:$item['price'] ?>
 <td>     
   <div class="product__price text-center d-flex gap-2 flex-wrap">
   <?php if(isset($product['discount_price'])): ?>
-    <span class="product__price"> <?= $product['discount_price']  *  $item['qty'] ?>   جنيه</span> *  
+    <span class="product__price"> <?php  $single_Dis  =$product['discount_price']  *  $item['qty'];
+                                        
+                                        $_SESSION['singleDis']=$single_Dis;
+                                        
+                                        echo $single_Dis
+    ?>   جنيه</span> *  
      <span class="product__price"> <?= $product['discount_price'] . "X". $item['qty'] ?>   جنيه</span> *  
 
 <?php else: ?>
-      <span class="product__price">  <?= $product['price']  * $item['qty'] ?>  جنيه </span> * 
+      <span class="product__price">  <?= $single_Price=$product['price']  *  $item['qty']; 
+      
+                                        $_SESSION['singlePrice']=$single_Price;
+                                        
+                                        echo $single_Price?>  جنيه </span> * 
+
       <span class="product__price">  <?= $product['price'] . "X". $item['qty'] ?>  جنيه </span> * 
     </div>
     <?php endif ?>
@@ -189,7 +207,10 @@ $result = $crud->read('books');
     <p>الدفع عند التسليم مباشرة.</p>
   </div>
 </section>
+
  
+
+    <?php endif ?>
 
  
 

@@ -16,7 +16,7 @@ if(isset($_GET['id'])){
 $id =$_GET['id'];
   $result = $crud->read('books', "`id` = $id");
 }else{
-  echo "";
+  echo "no";
 }
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');
@@ -48,16 +48,19 @@ $Q = $crud->read('description_single_products');
           <div class="product__author"><?= $item['author'] ?></div>
           <div class="product__author"></div>
           <div class="product__price mb-3 text-center d-flex gap-2">
-            <?php if (isset($item['offer'])): ?>
+             <?php if (isset($item['discount_price'])): ?>
               <h4 class="mr-1">$
-                <?= $item['offer'] ?>
+                <?= $item['discount_price'] ?>
               </h4>
               <span class="strike-text text-decoration-line-through">
                 $<?= $item['price'] ?>
               </span>
             <?php else: ?>
               <h4 class="mr-1">$<?= $item['price'] ?></h4>
-            <?php endif; ?>
+            <?php endif; ?> 
+
+<?php # $item['discount_price'] ?  print_r( $item['discount_price']) : print_r($item['price']) ?>
+
 
           </div>
           <div class="d-flex w-100 gap-2 mb-3">
@@ -72,7 +75,7 @@ $Q = $crud->read('description_single_products');
               href="<?php echo $config['base_url'] ?>controllers/add_to_cart.php?id=<?= $item['id'] ?>">اضافه الي السلة</a>
           </div>
           <div class="single-product__favourite d-flex align-items-center gap-2 mb-4">
-            <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $item['id'] ?>">
+            <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $item['id'] ?>&page=single">
             <i class="fa-regular fa-heart"></i>
             </a>
             اضافة للمفضلة
@@ -201,9 +204,11 @@ $Q = $crud->read('description_single_products');
       ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
-            <a href="single-product.html">
+            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?=$product['id']?>">
               <div class="product__img-cont">
-                <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image'] ?>" data-id="white">
+                <img class="product__img w-100 h-100 object-fit-cover" 
+                  src="<?= $config['base_url']; ?>assets/images/books/<?= $product['image']; ?>"                
+                  data-id="white">
               </div>
             </a>
             <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
@@ -215,7 +220,7 @@ $Q = $crud->read('description_single_products');
             </div>
           </div>
           <div class="product__title text-center">
-            <a class="text-black text-decoration-none" href="single-product.html">
+            <a class="text-black text-decoration-none" href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?=$product['id']?>">
               <?= $product['title'] ?>
             </a>
           </div>
@@ -224,10 +229,10 @@ $Q = $crud->read('description_single_products');
           </div>
           <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
             <span class="product__price product__price--old">
-              <?= $product['offer'] ?> جنيه
+              <?= $product['price'] ?> جنيه
             </span>
             <span class="product__price">
-              <?= $product['price'] ?> جنيه
+              <?= $product['discount_price'] ?> جنيه
             </span>
           </div>
         </div>
@@ -248,9 +253,11 @@ $Q = $crud->read('description_single_products');
       ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
-            <a href="single-product.html">
+            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?=$product['id']?>">
               <div class="product__img-cont">
-                <img class="product__img w-100 h-100 object-fit-cover" src="<?= $product['image'] ?>" data-id="white">
+                <img class="product__img w-100 h-100 object-fit-cover" 
+                  src="<?= $config['base_url']; ?>assets/images/books/<?= $product['image']; ?>"                
+                  data-id="white">
               </div>
             </a>
             <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
@@ -262,7 +269,7 @@ $Q = $crud->read('description_single_products');
             </div>
           </div>
           <div class="product__title text-center">
-            <a class="text-black text-decoration-none" href="single-product.html">
+            <a class="text-black text-decoration-none" href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?=$product['id']?>">
               <?= $product['title'] ?>
             </a>
           </div>
@@ -271,10 +278,10 @@ $Q = $crud->read('description_single_products');
           </div>
           <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
             <span class="product__price product__price--old">
-              <?= $product['offer'] ?> جنيه
+              <?= $product['price'] ?> جنيه
             </span>
             <span class="product__price">
-              <?= $product['price'] ?> جنيه
+              <?= $product['discount_price'] ?> جنيه
             </span>
           </div>
         </div>

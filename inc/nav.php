@@ -296,7 +296,8 @@ $category=$cat->read("category")
     <div class="nav__cart offcanvas offcanvas-end px-3 py-2" tabindex="-1" id="nav__cart" aria-labelledby="nav__cart">
       <div class="nav__categories-header offcanvas-header align-items-center">
         <h5>سلة التسوق</h5>
-        <button type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
+        <button   type="button" class="border-0 bg-transparent text-danger nav__close" data-bs-dismiss="offcanvas"
+        
           aria-label="Close">
           <i class="fa-solid fa-x fa-1x fw-light"></i>
         </button>
@@ -309,11 +310,16 @@ $category=$cat->read("category")
               <?php  $result = $crud->read('books', "`id` = $id"); ?>
               <?php foreach ($result as $product): ?>
                 <ul class="nav__list list-unstyled">
+                  <?php  
+              
+              $_SESSION['productCheck']=$product;
+                  // print_r($_SESSION['cart'][$id]);
+                  ?>
 
                   <li class="cart-products__item d-flex justify-content-between gap-2">
                     <div class="d-flex gap-2">
                       <div>
-                        <button class="cart-products__remove">x</button>
+                        <a  href="<?= $config['base_url']; ?>controllers/removeFromCart.php?id=<?=$id ?>" class="cart-products__remove">x</a>
                       </div>
                       <div>
                         <p class="cart-products__name m-0 fw-bolder"><?php $product['title'] ?></p>
@@ -337,14 +343,18 @@ $category=$cat->read("category")
                 </ul>
               <?php endforeach ?>
 
+<?php $_SESSION['check']=$_SESSION['productCheck'];
 
-
-            <?php endforeach ?>
-
+?> 
+ 
+ 
+ <?php endforeach ?>
+ 
+<?php  // print_r($_SESSION['cart'] ); ?>
  
             <div class="d-flex justify-content-between">
               <p class="fw-bolder">المجموع:</p>
-<?php    $totalPrice =calculateTotalPriceA($carts);
+<?php    $totalPrice =calculateTotalPriceT($carts);
 
 $_SESSION['totalP']=$totalPrice;
 ?>

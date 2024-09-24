@@ -13,7 +13,7 @@ require_once 'function.php';
 
 <?php
 
- 
+
 ?>
 <style>
   a {
@@ -43,33 +43,35 @@ require_once 'function.php';
         <div class="input-group rounded-1 mb-3">
           <input type="text" class="form-control p-3" placeholder="الاسم كامل" name="name" aria-label="Username"
             aria-describedby="basic-addon1" <?php if(isset($_SESSION['name'])): ?>
-            value=" <?php $_SESSION['name'] ?>" <?php endif ?> />
+            value=" <?php echo $_SESSION['name'] ?>" <?php endif ?> />
 
           <span class="input-group-text login__input-icon" id="basic-addon1">
             <i class="fa-solid fa-user"></i>
           </span>
 
         </div>
-        <?php  if(isset($_SESSION['errors']['name'])): ?>
-        <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['name'] ?></h4>
+        <?php  if(isset($_SESSION['errors'][0]['name'])): ?>
+        <h4 class="text-end text-danger"><?php echo $_SESSION['errors'][0]['name'] ?></h4>
 
         <?php  endif ?>
         
 
-
+<?php
+// print_r($_SESSION);
+?>
 
         <div class="input-group rounded-1 mb-3">
 
           <input type="text" class="form-control p-3" placeholder="البريد الالكتروني" name="email" aria-label="Email" aria-describedby="basic-addon1" 
-            <?php if(isset($_SESSION['email'])): ?> value=" <?php $_SESSION['email'] ?>" <?php endif ?> />
+            <?php if(isset($_SESSION['email'])): ?> value=" <?php echo $_SESSION['email'] ?>" <?php endif ?> />
 
           <span class="input-group-text login__input-icon" id="basic-addon1">
             <i class="fa-solid fa-envelope"></i>
           </span>
 
         </div>
-        <?php  if(isset($_SESSION['errors']['email'])): ?>
-        <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['email'] ?></h4>
+        <?php  if(isset($_SESSION['errors'][0]['email'])): ?>
+        <h4 class="text-end text-danger"><?php echo $_SESSION['errors'][0]['email'] ?></h4>
 
         <?php  endif ?>
 
@@ -82,8 +84,8 @@ require_once 'function.php';
           </span>
         </div>
 
-        <?php  if(isset($_SESSION['errors']['password'])): ?>
-        <h4 class="text-end text-danger"><?php echo $_SESSION['errors']['password'] ?></h4>
+        <?php  if(isset($_SESSION['errors'][0]['password'])): ?>
+        <h4 class="text-end text-danger"><?php echo $_SESSION['errors'][0]['password'] ?></h4>
 
         <?php  endif ?>
 
@@ -117,12 +119,14 @@ require_once 'function.php';
 
 
 <?php
+
+// print_r( $_SESSION['errors']);
 unset($_SESSION['name']);
 unset($_SESSION['email']);
 unset($_SESSION['password']);
-unset($_SESSION['errors']['name']);
-unset($_SESSION['errors']['email']);
-unset($_SESSION['errors']['password']);
+unset($_SESSION['errors'][0]['name']);
+unset($_SESSION['errors'][0]['email']);
+unset($_SESSION['errors'][0]['password']);
 require_once 'inc/footer.php';
 
 ?>

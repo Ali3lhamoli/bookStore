@@ -2,7 +2,7 @@
 function redirect($url)
 {
   header("Location: http://localhost/bookStore/" . $url);
-
+exit();
 }
 function IDExists()
 {
@@ -22,7 +22,7 @@ function calculateTotalPriceA($cart)
 {
   $total = 0;
   foreach ($cart as $item) {
-    $total += $item['price'] * $item['qty'];
+    $total += $item['discount_price']? $item['discount_price'] * $item['qty'] : $item['price'] * $item['qty'] ;
   }
   return $total;
 }
@@ -30,8 +30,18 @@ function calculateTotalPriceP($cart)
 {
   $total = 0;
   foreach ($cart as $item) {
-    $total += $item['mony'] * $item['qty'];
+    $total += $item['discount_price']? $item['discount_price'] * $item['qty'] : $item['price'] * $item['qty'];
   }
+  return $total;
+}
+function calculateTotalPriceT($cart)
+{
+  $total = 0;
+  foreach ($cart as $item) {
+    $total += $item['products']['discount_price']? $item['products']['discount_price'] * $item['qty'] : $item['price'] * $item['qty'];
+ 
+  }
+
   return $total;
 }
 function getProductDetailsPagenation($table_name,$start,$last,$connection) 
@@ -76,8 +86,8 @@ function addToCart($product, $id)
     $_SESSION['cart'][$id] = [
       //  'id'=>$id,
       'products' => $product,
-      'price' => $product['offer'] ? $product['offer'] : $product['price'],
-      'mony' => $product['price'],
+      'price' =>   $product['price'],
+      'discount_price' => $product['discount_price'],
       'qty' => 1,
 
 

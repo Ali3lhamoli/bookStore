@@ -46,9 +46,9 @@ while ($row = mysqli_fetch_assoc($result)) {
         <?php foreach ($favorite_books as $book): ?>
           <tr>
             <td class="d-block d-md-table-cell">
-              <span class="favourites__remove m-auto">
+              <a href="<?= $config['base_url'] ?>index.php?page=removefav&id=<?= $book['id']; ?>" class="favourites__remove m-auto">
                 <i class="fa-solid fa-xmark"></i>
-              </span>
+              </a>
             </td>
             <td class="d-block d-md-table-cell favourites__img">
               <img src="<?= $config['base_url']; ?>assets/images/books/<?= $book['image']; ?> " alt="" />
