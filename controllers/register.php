@@ -44,8 +44,6 @@ foreach($dataFromUser as $userEm){
     if (!empty($_SESSION['errors'])) {
         redirect("index.php?page=account");
         exit;
-    }elseif(isset($email)){
-
     }elseif (empty($_SESSION['errors'])) {
         $email=$_POST['email'];
         $name=$_POST['name'];

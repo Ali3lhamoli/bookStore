@@ -22,4 +22,4 @@ addToCart($data, $id);
 // echo "<pre>"; 
 //  print_r($_SESSION['cart']);
 //  echo "</pre>";
-redirect("index.php?page=single-product");
+redirect("index.php?page=single-product&id=$id");
