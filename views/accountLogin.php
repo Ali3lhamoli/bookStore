@@ -44,7 +44,7 @@ require_once 'inc/subSectionFromMain.php';
 
         </div>
         <?php if (isset($_SESSION['errors'][0]['email'])): ?>
-         <?php  $_SESSION['errors'] ?>
+        
           <h4 class="text-end text-danger"><?php echo $_SESSION['errors'][0]['email'] ?></h4>
  
         <?php endif ?>

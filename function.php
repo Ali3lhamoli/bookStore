@@ -2,7 +2,7 @@
 function redirect($url)
 {
   header("Location: http://localhost/bookStore/" . $url);
-
+exit();
 }
 function IDExists()
 {

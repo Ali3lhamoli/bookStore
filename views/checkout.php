@@ -1,33 +1,31 @@
-<?php
-
-
-require_once 'inc/header.php';
-require_once 'inc/nav.php';
-require_once 'function.php';
-
-$sub_section = 'اتمام الطلب';
-require_once 'inc/subSectionFromMain.php';
-require_once 'validation/validation.php';
-// require_once 'validation/validation.php';
-$cart = $_SESSION['cart'];
  
-// $crud = new DatabaseCrud();  
-$result = $crud->read('books'); 
- 
-// $Vali= new Validation;
-
-// $Vali->getError();
-
-// echo "<pre>";
-// print_r($Vali);
-// echo "</pre>";
-
-?>
 
 
  
  
 
+<?php 
+if(isset($_SESSION['cart']['price'])==0 && isset($_SESSION['client'])==0):?>
+<?php  require_once "function.php";
+redirect("index.php?page=home")
+//  exit(); // تأكد من إنهاء التنفيذ بعد إعادة التوجيه ?>
+
+<?php else: ?>
+<?php 
+  require_once 'inc/header.php';
+  require_once 'inc/nav.php';
+  require_once 'function.php';
+  
+  $sub_section = 'اتمام الطلب';
+  require_once 'inc/subSectionFromMain.php';
+  require_once 'validation/validation.php';
+  // require_once 'validation/validation.php';
+  $cart = $_SESSION['cart'];
+   
+  // $crud = new DatabaseCrud();  
+  $result = $crud->read('books'); 
+   
+  ?>
   <section class="section-container my-5 py-5 d-lg-flex">
   <div class="checkout__form-cont w-50 px-3 mb-5">
     <h4>الفاتورة </h4>
@@ -209,7 +207,10 @@ $result = $crud->read('books');
     <p>الدفع عند التسليم مباشرة.</p>
   </div>
 </section>
+
  
+
+    <?php endif ?>
 
  
 

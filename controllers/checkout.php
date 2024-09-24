@@ -115,7 +115,7 @@ $addOrder2 = $crud->create('order_items', $order_items);
             //               ];
  
 
-// redirect("index.php?page=UnsetCart");
+redirect("index.php?page=UnsetCart");
  
  
 
