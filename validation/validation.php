@@ -140,3 +140,115 @@ function isEmptyPhone($name)
     }
  
 }
+
+
+
+class Validation {
+    private $_errors = [];
+/****************************start the input is empty***************************** */
+    function requierd($inputName,$input){
+        if(empty($input)){
+            $error = [$inputName => "the filed is reqierd"];
+            array_push($this->_errors,$error);
+        }
+    }
+/****************************end the input is empty***************************** */
+
+
+/****************************start check the  max len for input ***************************** */
+
+function max($inputName,$input,$max_val){
+    if(strlen($input)>$max_val){
+        $error=[$inputName => "the filed must be less than $max_val"];
+        array_push($this->_errors,$error);
+    }
+}
+
+/****************************end check the  max len for input ***************************** */
+
+/****************************start check the  min len for input ***************************** */
+
+function min($inputName,$input,$min_val){
+    if(strlen($input)<$min_val){
+        $error=[$inputName => "the filed must be less than $min_val"];
+        array_push($this->_errors,$error);
+    }
+}
+
+/****************************end check the  min len for input ***************************** */
+
+/****************************start check the  email is email ***************************** */
+
+
+
+function emailRule1($inputName,$input){
+    if(!filter_var($input,FILTER_VALIDATE_EMAIL)){
+        $error = [$inputName => "invaild Email"];
+        array_push($this->_errors,$error); 
+    }
+}
+/****************************end check the  email is email ***************************** */
+/****************************start check the  email is email with regex  ***************************** */
+
+function emailRul2($inputName,$input){
+    $regex="/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,4}$/";
+    if(!preg_match($regex,$input)){
+        $error = [$inputName =>"invalid email"];
+        array_push($this->_errors,$error);
+    }
+} 
+
+/****************************start check the  if number is number   ***************************** */
+/****************************start check the  email is email with regex  ***************************** */
+
+function matchingEmail($inputName,$input,$inputFromDb){
+  
+    if(!preg_match($input,$inputFromDb)){
+        $error = [$inputName =>" email not mach"];
+        array_push($this->_errors,$error);
+    }
+} 
+
+/****************************start check the  if number is number   ***************************** */
+
+function numric($inputName,$input){
+    if(!is_numeric($input)){
+        $error = [$inputName => "you must enter numbers only"];
+        array_push($this->_errors,$error);
+    }
+}
+/****************************end check the  if number is number   ***************************** */
+
+function alpha($inputName,$input){
+    $regex ="/^[a-zA-Z]+$/";
+    if(!preg_match($regex,$input)){
+$error=[$inputName=>"you must enter only letters. "];
+array_push($this->_errors,$error);
+    }
+}
+
+function matchInput($inputName,$input,$matchInput){
+    if($input !== $matchInput){
+        $error = [$inputName => "you must match the filed"];
+        array_push($this->_errors,$error);
+    }
+}
+
+
+function matchPattern($inputName,$input,$regex){
+    if(!preg_match($regex,$input)){
+        $error= [$inputName =>"thr input must match the pattern"];
+        array_push($this->_errors,$error);
+    }
+}
+
+function getError(){
+    return $this->_errors;
+}
+
+}
+
+
+
+
+

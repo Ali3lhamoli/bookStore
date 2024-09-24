@@ -48,16 +48,19 @@ $Q = $crud->read('description_single_products');
           <div class="product__author"><?= $item['author'] ?></div>
           <div class="product__author"></div>
           <div class="product__price mb-3 text-center d-flex gap-2">
-            <?php if (isset($item['offer'])): ?>
+             <?php if (isset($item['discount_price'])): ?>
               <h4 class="mr-1">$
-                <?= $item['offer'] ?>
+                <?= $item['discount_price'] ?>
               </h4>
               <span class="strike-text text-decoration-line-through">
                 $<?= $item['price'] ?>
               </span>
             <?php else: ?>
               <h4 class="mr-1">$<?= $item['price'] ?></h4>
-            <?php endif; ?>
+            <?php endif; ?> 
+
+<?php # $item['discount_price'] ?  print_r( $item['discount_price']) : print_r($item['price']) ?>
+
 
           </div>
           <div class="d-flex w-100 gap-2 mb-3">

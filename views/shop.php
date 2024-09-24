@@ -98,11 +98,11 @@ if (isset($_GET['type'])) {
          ?>
         <div class="products__item col-6 col-md-4 col-lg-3 mb-5">
           <div class="product__header mb-3">
-            <a href="<?= $config['base_url']; ?>index.php?page=single-product&id=<?= $item['id'] ?>">
+            <a href="<?php $config['base_url']; ?>index.php?page=single-product&id=<?php $item['id'] ?>">
               <div class="product__img-cont">
                 <img
                   class="product__img w-100 h-100 object-fit-cover"
-                  src="<?= $config['base_url']; ?>assets/images/books/<?= $item['image']  ?>"
+                  src=" <?= $item['image'] ?>"
                   data-id="white" />
               </div>
             </a>

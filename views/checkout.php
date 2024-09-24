@@ -8,11 +8,19 @@ require_once 'function.php';
 $sub_section = 'اتمام الطلب';
 require_once 'inc/subSectionFromMain.php';
 require_once 'validation/validation.php';
+// require_once 'validation/validation.php';
 $cart = $_SESSION['cart'];
  
-$crud = new DatabaseCrud();  
+// $crud = new DatabaseCrud();  
 $result = $crud->read('books'); 
  
+// $Vali= new Validation;
+
+// $Vali->getError();
+
+// echo "<pre>";
+// print_r($Vali);
+// echo "</pre>";
 
 ?>
 
@@ -56,8 +64,8 @@ $result = $crud->read('books');
       <div class="mb-3">
         <label for="last-name">المدينة / المحافظة<span class="required">*</span></label>
         <select class="form__input bg-transparent" name="state" type="text" id="last-name">
-          <option value="">القاهرة</option>
-          <option value="">اسكندرية</option>
+          <option value="cairo">القاهرة</option>
+          <option value="alex">اسكندرية</option>
         </select>
       </div>
       <div class="mb-3">
