@@ -34,6 +34,16 @@ function calculateTotalPriceP($cart)
   }
   return $total;
 }
+function calculateTotalPriceT($cart)
+{
+  $total = 0;
+  foreach ($cart as $item) {
+    $total += $item['products']['discount_price']? $item['products']['discount_price'] * $item['qty'] : $item['price'] * $item['qty'];
+ 
+  }
+
+  return $total;
+}
 function getProductDetailsPagenation($table_name,$start,$last,$connection) 
 {
 

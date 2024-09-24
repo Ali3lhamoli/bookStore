@@ -130,15 +130,27 @@ $result = $crud->read('books');
               <!-- title -->
               <td> <?php print_r($product['title']) ?>   </td>
 <!-- price & Qty -->
-<?php   $_SESSION['cart_qty']= [$item['qty'], $item['discount_price']?? $item['discount_price']::$item['price'] ] ?>
+<?php   $_SESSION['cart_qty']= [$item['qty'] ] ?>
+
+<?php  $_SESSION['cart_price']= $item['discount_price']? $item['discount_price']:$item['price'] ?>
 <td>     
   <div class="product__price text-center d-flex gap-2 flex-wrap">
   <?php if(isset($product['discount_price'])): ?>
-    <span class="product__price"> <?= $product['discount_price']  *  $item['qty'] ?>   جنيه</span> *  
+    <span class="product__price"> <?php  $single_Dis  =$product['discount_price']  *  $item['qty'];
+                                        
+                                        $_SESSION['singleDis']=$single_Dis;
+                                        
+                                        echo $single_Dis
+    ?>   جنيه</span> *  
      <span class="product__price"> <?= $product['discount_price'] . "X". $item['qty'] ?>   جنيه</span> *  
 
 <?php else: ?>
-      <span class="product__price">  <?= $product['price']  * $item['qty'] ?>  جنيه </span> * 
+      <span class="product__price">  <?= $single_Price=$product['price']  *  $item['qty']; 
+      
+                                        $_SESSION['singlePrice']=$single_Price;
+                                        
+                                        echo $single_Price?>  جنيه </span> * 
+
       <span class="product__price">  <?= $product['price'] . "X". $item['qty'] ?>  جنيه </span> * 
     </div>
     <?php endif ?>

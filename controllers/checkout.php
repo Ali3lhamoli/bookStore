@@ -5,6 +5,7 @@ session_start();
  
 require_once "../validation/validation.php";
 require_once "../function.php";
+require_once "../core/functions.php";
 require_once "../classes/DatabaseConnection.php";
 require_once "../classes/DatabaseCrud.php";
  
@@ -16,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $state=$_POST['state'];
     $phone=$_POST['phone'];
     $email=$_POST['email'];
-
+$con=DatabaseConnection::getInstance()->getConnection();
   "true";
 
 // print_r($_SESSION['check']['id']);
@@ -30,6 +31,7 @@ $val->emailRule1("email",$email);
 
 $fullName=$firstName . " " . $last_name;
  
+// print_r($_SESSION['client']);
  
 /********************************************************** */
 
@@ -41,7 +43,6 @@ $id_User= $_SESSION['client']['id'];
 //  echo "$id_User";
  
  
-  
     $statue='pending';
       $created_at= $_SESSION['check']['created_at'];
       $updated_at= $_SESSION['check']['updated_at'];
@@ -68,30 +69,60 @@ $data= ["user_id"=>$id_User,
 $id_order = $crud->read('orders'); // Specify your table name
 
   
-$order_id= $id_order[0];
+// $order_id= $id_order[0];
 //  print_r($_SESSION['totalP']);
-// print_r($order_id['id']);
 
-  $book_id= $_SESSION['check']['id'];
-    
-    $product_qty=$_SESSION['cart_qty'][0];
-    $product_price= $_SESSION['cart_qty'][1];
-    // print_r( $_SESSION['cart_qty']) ;
-  $order_items= ["order_id"=>$order_id['id'],
-                  "book_id"=>$book_id,
-                  "quantity"=>$product_qty,
-                  "unit_price"=>$product_price,
-                  // "discount_applied"=>$discount_applied
-                  "total_price"=>$totalPrice
+// $book_id= $_SESSION['check'];
 
-                ];
 
-  // print_r($order_items);
+
+
+ 
+              $product_price= $_SESSION['cart_price'];
+foreach($_SESSION['cart'] as $catId){
+  ////////////////////////////////
+  $lastId = getLastRow("orders", $con);
+  ////////////////////////////////
+  $book_id=$catId['products']['id'];
+  ////////////////////////////////
+  $totalOwnProduct=0;
+  $totalOwnProduct += isset($catId['discount_price']) ? $catId['discount_price'] *$catId['qty'] : $catId['price'] *$catId['qty'];
+   
+  $order_items= [
+                "order_id"=>$lastId['id'],
+                "book_id"=>$book_id,
+                "quantity"=>$catId['qty'],
+                "unit_price"=> $catId['price'],
+                "discount_applied"=>$catId['discount_price'],
+                "total_price"=>$totalOwnProduct
+                          ];
+  
+  // print_r($lastId['id']);
+                          
+}
 $addOrder2 = $crud->create('order_items', $order_items);
+// $id_book=$_SESSION['cart']
 
-redirect("index.php?page=UnsetCart");
+            //   
+            //   // print_r( $_SESSION['cart_qty']) ;
+            // $order_items= ["order_id"=>$order_id['id'],
+            //                 "book_id"=>$id_book,
+            //                 "quantity"=>$product_qty,
+            //                 "unit_price"=>$product_price,
+            //                 // "discount_applied"=>$discount_applied
+            //                 "total_price"=>$totalPrice
+          
+            //               ];
+ 
+
+// redirect("index.php?page=UnsetCart");
  
  
 
     
-}}
+}else{
+  redirect("index.php?page=accountLogin");
+
+}
+
+}

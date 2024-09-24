@@ -16,7 +16,7 @@ if(isset($_GET['id'])){
 $id =$_GET['id'];
   $result = $crud->read('books', "`id` = $id");
 }else{
-  echo "";
+  echo "no";
 }
 $fav = $crud->readLIMIT('books');
 $serves = $crud->read('services');

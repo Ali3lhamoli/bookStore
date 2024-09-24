@@ -354,7 +354,7 @@ $category=$cat->read("category")
  
             <div class="d-flex justify-content-between">
               <p class="fw-bolder">المجموع:</p>
-<?php    $totalPrice =calculateTotalPriceA($carts);
+<?php    $totalPrice =calculateTotalPriceT($carts);
 
 $_SESSION['totalP']=$totalPrice;
 ?>

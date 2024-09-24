@@ -57,11 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             foreach ($user as $client) {
 
-                if (password_verify($passwordOf_user, $client['password'])) {
+                if (password_verify($password, $client['password'])) {
 
                     $_SESSION['client'] = $client;
 
-                    $_SESSION['passwordU'] = $passwordOf_user;
+                    $_SESSION['passwordU'] = $password;
                     redirect("index.php?page=home");
 
                 } else {

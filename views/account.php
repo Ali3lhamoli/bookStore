@@ -119,6 +119,8 @@ require_once 'function.php';
 
 
 <?php
+
+// print_r( $_SESSION['errors']);
 unset($_SESSION['name']);
 unset($_SESSION['email']);
 unset($_SESSION['password']);
