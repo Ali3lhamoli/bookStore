@@ -77,7 +77,9 @@ $allBooks = $crud->read("books");
             <?php endif; ?>
             <div
               class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
+              <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $book['id'] ?>&page=home">
               <i class="fa-regular fa-heart"></i>
+              </a>
             </div>
           </div>
           <div class="product__title text-center">
@@ -147,7 +149,9 @@ $allBooks = $crud->read("books");
             <?php endif; ?>
             <div
               class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
+              <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $book['id'] ?>&page=home">
               <i class="fa-regular fa-heart"></i>
+              </a>            
             </div>
           </div>
           <div class="product__title text-center">
@@ -198,7 +202,9 @@ $allBooks = $crud->read("books");
             <?php endif; ?>
             <div
               class="product__favourite position-absolute top-0 end-0 m-1 rounded-circle d-flex justify-content-center align-items-center bg-white">
+              <a href="<?php echo $config['base_url'] ?>controllers/fav.php?id=<?= $book['id'] ?>&page=home">
               <i class="fa-regular fa-heart"></i>
+              </a>            
             </div>
           </div>
           <div class="product__title text-center">

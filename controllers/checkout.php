@@ -49,7 +49,7 @@ $id_User= $_SESSION['client']['id'];
 $data= ["user_id"=>$id_User,
         "total_price"=>$totalPrice, 
         "payment_status"=>"cash", 
-        /** shipping_status*/
+        "shipping_status"=>"panding",
         "status"=>$statue,
         "billing_name"=>$fullName,
         "billing_address"=>$address,
@@ -60,6 +60,7 @@ $data= ["user_id"=>$id_User,
         "created_at"=>$created_at,
         "updated_at"=>$updated_at
       ];
+      $_SESSION['order_details'] = $data;
     $addOrder = $crud->create('orders', $data);
 
 /********************************************************** */
@@ -82,6 +83,7 @@ $id_order = $crud->read('orders'); // Specify your table name
 foreach($_SESSION['cart'] as $catId){
   ////////////////////////////////
   $lastId = getLastRow("orders", $con);
+  $_SESSION['order_details'][] = $lastId['id'];
   ////////////////////////////////
   $book_id=$catId['products']['id'];
   ////////////////////////////////

@@ -30,7 +30,7 @@ $order = $crud->read("orders JOIN users ON orders.user_id = users.id",
 
 if (!empty($order)) {
     $_SESSION['order_details'] = $order[0];
-    header("Location: " . $config['base_url'] . "index.php?page=order-received");
+    header("Location: " . $config['base_url'] . "index.php?page=order-recieved");
     exit;
 } else {
     $_SESSION['order_not_found'] = "عذرًا، لم يتم العثور على طلب بهذا الرقم أو البريد الإلكتروني.";

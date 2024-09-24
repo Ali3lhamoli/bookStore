@@ -123,7 +123,8 @@ if (isset($_GET['type'])) {
               
               <a href="<?php $config['base_url']; ?>index.php?page=single-product&id=<?php echo  $item['id'] ?>">
                 <div class="product__img-cont">
-                  <img class="product__img w-100 h-100 object-fit-cover" src=" <?= $item['image'] ?>" data-id="white" />
+                  <img class="product__img w-100 h-100 object-fit-cover"src="<?= $config['base_url']; ?>assets/images/books/<?= $item['image']; ?>"
+                  data-id="white" />
                 </div>
               </a>
               <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">
@@ -163,7 +164,9 @@ if (isset($_GET['type'])) {
             <div class="product__header mb-3">
               <a href="<?php $config['base_url']; ?>index.php?page=single-product&id=<?php echo $item['id'] ?>">
                 <div class="product__img-cont">
-                  <img class="product__img w-100 h-100 object-fit-cover" src=" <?= $item['image'] ?>" data-id="white" />
+                  <img class="product__img w-100 h-100 object-fit-cover" 
+                    src="<?= $config['base_url']; ?>assets/images/books/<?= $item['image']; ?>"
+                    data-id="white" />
                 </div>
               </a>
               <div class="product__sale position-absolute top-0 start-0 m-1 px-2 py-1 rounded-1 text-white">

@@ -49,7 +49,7 @@ foreach($dataFromUser as $userEm){
         $name=$_POST['name'];
         $passwordH=$_POST['password'];
 
-        $passwordH = password_hash($password, PASSWORD_DEFAULT);
+        $passwordH = password_hash($passwordH, PASSWORD_DEFAULT);
 
 
 
