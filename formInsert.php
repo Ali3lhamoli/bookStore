@@ -1,16 +1,25 @@
 <?php
 require_once "./function.php";
-$connection= new mysqli("localhost","root","","bookStore");
+require_once "./classes/DatabaseConnection.php";
+// require_once "./classes/";
 
+$connection= new mysqli("localhost","root","","bookStore");
+$sql="SELECT * FROM category ";
+
+mysqli_query($connection, $sql);
 
  
     $title=$_POST['title'];
     $author=$_POST['author'];
+    $pages=$_POST['pages'];
     $price=$_POST['price'];
-     $pages=$_POST['pages'];
      $discount_price=$_POST['discount_price'];
     $stock=$_POST['stock'];
-     $image=$_FILES['image'];
+    // $description=$_POST['description'];
+    $image=$_FILES['image'];
+    $category=$_POST['category'];
+    $rating=$_POST['rating'];
+    // $purchases=$_POST['purchases'];
 
 // echo "<pre>";
 
@@ -56,23 +65,30 @@ if (!move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
 
 // $title=$_POST['title'];
 // $author=$_POST['author'];
+// $pages=$_POST['pages'];
 // $price=$_POST['price'];
-// $offer=$_POST['offer'];
+//  $discount_price=$_POST['discount_price'];
 // $stock=$_POST['stock'];
 // $description=$_POST['description'];
 // $image=$_FILES['image'];
+// $category=$_POST['category'];
+// $rating=$_POST['rating'];
+// $purchases=$_POST['purchases'];
 
 
 
-$products= "INSERT INTO `books` (`title`,`image`,`price`,`author`,`stock`,`discount_price` ) values(
+$products= "INSERT INTO `books` (`title`,`author`,pages,`price`,`image`,`stock`,`discount_price`,`cat_id`,`rating` ) values(
 
 '$title',
-
-'$targetFile',
-'$price',
 '$author',
+'$pages',
+-- '$pages',
+'$price',
+'$targetFile',
 '$stock',
-'$discount_price'
+'$discount_price',
+'$category',
+'$rating'
 
  
  
