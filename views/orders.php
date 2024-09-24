@@ -7,6 +7,7 @@ require_once 'inc/nav.php';
 
 $sub_section = 'الطلبات';
 require_once 'inc/subSectionFromMain.php';
+require_once 'inc/sidebar.php';
 
 $user_id = $_SESSION['client']['id'] ?? null;
 
@@ -21,32 +22,7 @@ $orders = $crud->read("orders", "user_id = '$user_id'", "*");
 
 ?>
 
-<section class="section-container profile my-3 my-md-5 py-5 d-md-flex gap-5">
-<div class="profile__right">
-      <div class="profile__user mb-3 d-flex gap-3 align-items-center">
-        <div class="profile__user-img rounded-circle overflow-hidden">
-          <img class="w-100" src="assets/images/user.png" alt="">
-        </div>
-        <div class="profile__user-name">moamenyt</div>
-      </div>
-      <ul class="profile__tabs list-unstyled ps-3">
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="profile.html">لوحة التحكم</a>
-        </li>
-        <li class="profile__tab active">
-          <a class="py-2 px-3 text-black text-decoration-none" href="orders.html">الطلبات</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="account_details.html">تفاصيل الحساب</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="favourites.html">المفضلة</a>
-        </li>
-        <li class="profile__tab">
-          <a class="py-2 px-3 text-black text-decoration-none" href="">تسجيل الخروج</a>
-        </li>
-      </ul>
-    </div>
+
     <div class="profile__left mt-4 mt-md-0 w-100">
         <div class="profile__tab-content orders active">
             <?php if (empty($orders)): ?>

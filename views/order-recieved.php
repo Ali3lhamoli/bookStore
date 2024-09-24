@@ -14,7 +14,7 @@ if ($orderDetails && $orderDetails === null) {
   header("Location: " . $config['base_url'] . "index.php?page=track-order");
   exit;
 }
-
+// dd($orderDetails);
 ?>
 
 <section class="section-container profile my-5 py-5">
@@ -47,7 +47,7 @@ if ($orderDetails && $orderDetails === null) {
     <div class="d-flex flex-wrap gap-2">
       <div class="success__details">
         <p class="success__small">رقم الطلب:</p>
-        <p class="fw-bolder"><?php echo $orderDetails['id']; ?></p>
+        <p class="fw-bolder"><?php echo $orderDetails['0']; ?></p>
       </div>
       <div class="success__details">
         <p class="success__small">التاريخ:</p>
@@ -55,7 +55,7 @@ if ($orderDetails && $orderDetails === null) {
       </div>
       <div class="success__details">
         <p class="success__small">البريد الإلكتروني:</p>
-        <p class="fw-bolder"><?php echo $orderDetails['email']; ?></p>
+        <p class="fw-bolder"><?php echo $orderDetails['billing_email']; ?></p>
       </div>
       <div class="success__details">
         <p class="success__small">الإجمالي:</p>
@@ -86,7 +86,7 @@ if ($orderDetails && $orderDetails === null) {
       <?php
       $orderItems = $crud->read(
         "order_items JOIN books ON order_items.book_id = books.id",
-        "order_items.order_id = '" . $orderDetails['id'] . "'",
+        "order_items.order_id = '" . $orderDetails['0'] . "'",
         "books.title, order_items.quantity, order_items.unit_price"
       );
       $total = 0;
