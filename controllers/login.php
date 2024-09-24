@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!empty($_SESSION['errors'])) {
         redirect("index.php?page=accountLogin");
-
+print_r($_SESSION['errors']);
 
 
     } else {
@@ -45,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $filed = "email ,  password , name,id";
         $user = $git->read('users', $where, $filed);
-
-        redirect("index.php?page=accountLogin");
+ 
 
         if (empty($user)) {
 
 
             $_SESSION['errors'][0]['email'] = "email not math";
+        redirect("index.php?page=accountLogin");
 
         } else {
 
@@ -61,11 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     $_SESSION['client'] = $client;
 
-                    $_SESSION['passwordU'] = $passwordOf_user;
+                    $_SESSION['passwordU'] = $password;
                     redirect("index.php?page=home");
 
                 } else {
                     $_SESSION['errors'][0]['password'] = "password not match";
+                    redirect("index.php?page=accountLogin");
                 }
             }
         }

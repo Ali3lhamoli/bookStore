@@ -2,7 +2,7 @@
 function redirect($url)
 {
   header("Location: http://localhost/bookStore/" . $url);
-
+exit();
 }
 function IDExists()
 {
@@ -32,6 +32,16 @@ function calculateTotalPriceP($cart)
   foreach ($cart as $item) {
     $total += $item['discount_price']? $item['discount_price'] * $item['qty'] : $item['price'] * $item['qty'];
   }
+  return $total;
+}
+function calculateTotalPriceT($cart)
+{
+  $total = 0;
+  foreach ($cart as $item) {
+    $total += $item['products']['discount_price']? $item['products']['discount_price'] * $item['qty'] : $item['price'] * $item['qty'];
+ 
+  }
+
   return $total;
 }
 function getProductDetailsPagenation($table_name,$start,$last,$connection) 
