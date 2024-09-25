@@ -40,7 +40,7 @@ $Q = $crud->read('description_single_products');
 
  
       <div class="single-product__img w-100" id="main-img">
-        <img src=" <?= $item['image'] ?>" alt="">
+        <img src="<?= $config['base_url']; ?>assets/images/books/<?= $item['image']; ?>"   alt="">
       </div>
       <div class="single-product__details w-100 d-flex flex-column justify-content-between">
         <div>

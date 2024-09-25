@@ -67,8 +67,8 @@ $id_User= $_SESSION['client']['id'];
       $updated_at= $_SESSION['check']['updated_at'];
 $data= ["user_id"=>$id_User,
         "total_price"=>$totalPrice, 
-        "payment_status"=>"cash", 
-        "shipping_status"=>"panding",
+        "payment_status"=>"pending", 
+        "shipping_status"=>"pending",
         "status"=>$statue,
         "billing_name"=>$fullName,
         "billing_address"=>$address,
