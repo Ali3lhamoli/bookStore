@@ -34,7 +34,7 @@ $Q = $crud->read('description_single_products');
 <main>
   <!-- Product details Start -->
   <?php
-  foreach ($result as $item):
+  foreach ($result as  $item):
   ?>
     <section class="section-container my-5 pt-5 d-md-flex gap-5">
 
@@ -61,15 +61,26 @@ $Q = $crud->read('description_single_products');
 
 <?php # $item['discount_price'] ?  print_r( $item['discount_price']) : print_r($item['price']) ?>
 
-
+<?php
+$idItem=$item['id'];
+//print_r() ?>
+<?php //print_r($key) ?>
           </div>
           <div class="d-flex w-100 gap-2 mb-3">
             <div class="single-product__quanitity position-relative">
-              <input class="single-product__input text-center px-3" type="number" value="1" placeholder="---">
-              <button
+
+           
+<?php if(isset($_SESSION['cart'][$idItem]['qty'])==1 ):?>
+  <input class="update-btn" type="number" value="<?= $_SESSION['cart'][$idItem]['qty']?>" 
+          data-id="<?=$idItem?>"    min="1" 
+   />
+     <?php else:?>
+      <?php endif ?>
+              <!-- <button
                 class="single-product__increase border-0 bg-transparent position-absolute end-0 h-100 px-3">+</button>
               <button
                 class="single-product__decrease border-0 bg-transparent position-absolute start-0 h-100 px-3">-</button>
+           -->
             </div>
             <a class="single-product__add-to-cart primary-button w-100 text"
               href="<?php echo $config['base_url'] ?>controllers/add_to_cart.php?id=<?= $item['id'] ?>">اضافه الي السلة</a>
@@ -315,9 +326,23 @@ $Q = $crud->read('description_single_products');
   </section>
   <!-- Users comments End -->
 </main>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+ $(document).on('change','.update-btn',function(){
+    let id = $(this).data('id');
+    let qty =$(this).val();
+ window.location.href =`http://localhost/bookStore/controllers/update_cart.php?id=${id}&qty=${qty}`;
+ });
+ </script>
+
+
+
 
 <?php
 
 require_once 'inc/footer.php';
 
 ?>
+
+

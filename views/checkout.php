@@ -143,7 +143,7 @@ redirect("index.php?page=home")
      <span class="product__price"> <?= $product['discount_price'] . "X". $item['qty'] ?>   جنيه</span> *  
 
 <?php else: ?>
-      <span class="product__price">  <?= $single_Price=$product['price']  *  $item['qty']; 
+      <span class="product__price">  <?php $single_Price=$product['price']  *  $item['qty']; 
       
                                         $_SESSION['singlePrice']=$single_Price;
                                         
@@ -162,7 +162,7 @@ redirect("index.php?page=home")
  <span class="product__price"> <?= $product['price'] - $product['discount_price']    ?>   جنيه</span> *  
 
  <?php else: ?>
-  <span class="product__price">  <?= $product['price'] ?>  جنيه </span> * 
+  <span class="product__price">  <?php echo 0 ?>  جنيه </span> * 
 
             </td>
         
