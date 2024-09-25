@@ -1,4 +1,23 @@
 <?php
+
+
+if($_SERVER['REQUEST_METHOD']=='POST'){
+  // echo "REQUEST_METHOD==POST";
+session_start();
+if(isset($_SESSION['client'])){
+  // client is exist
+  // echo "client";
+
+
+
+if( !empty($_SESSION['cart']) ==0){
+  // echo "cart not empty";
+  require_once "../function.php";
+  redirect("index.php?page=shop");
+
+}else{
+// echo "cart not empty";
+
 session_start();
 
 
@@ -9,7 +28,7 @@ require_once "../core/functions.php";
 require_once "../classes/DatabaseConnection.php";
 require_once "../classes/DatabaseCrud.php";
  
-if($_SERVER['REQUEST_METHOD']=='POST'){
+
     $firstName=$_POST['first_name'];
     $last_name=$_POST['last_name'];
     $state=$_POST['state'];
@@ -31,12 +50,12 @@ $val->emailRule1("email",$email);
 
 $fullName=$firstName . " " . $last_name;
  
-// print_r($_SESSION['client']);
+ 
  
 /********************************************************** */
 
      
-if(isset($_SESSION['client'])){
+ 
   $crud= new DatabaseCrud();
 $id_User= $_SESSION['client']['id'];
  $totalPrice= $_SESSION['totalP'];
@@ -61,8 +80,11 @@ $data= ["user_id"=>$id_User,
         "updated_at"=>$updated_at
       ];
       $_SESSION['order_details'] = $data;
-    $addOrder = $crud->create('orders', $data);
 
+
+  
+    $addOrder = $crud->create('orders', $data);
+   
 /********************************************************** */
 //                        order_items
 /********************************************************** */
@@ -70,10 +92,7 @@ $data= ["user_id"=>$id_User,
 $id_order = $crud->read('orders'); // Specify your table name
 
   
-// $order_id= $id_order[0];
-//  print_r($_SESSION['totalP']);
-
-// $book_id= $_SESSION['check'];
+ 
 
 
 
@@ -99,32 +118,39 @@ foreach($_SESSION['cart'] as $catId){
                 "total_price"=>$totalOwnProduct
                           ];
   
-  // print_r($lastId['id']);
+ 
                           
+  $addOrder2 = $crud->create('order_items', $order_items);
 }
-$addOrder2 = $crud->create('order_items', $order_items);
-// $id_book=$_SESSION['cart']
 
-            //   
-            //   // print_r( $_SESSION['cart_qty']) ;
-            // $order_items= ["order_id"=>$order_id['id'],
-            //                 "book_id"=>$id_book,
-            //                 "quantity"=>$product_qty,
-            //                 "unit_price"=>$product_price,
-            //                 // "discount_applied"=>$discount_applied
-            //                 "total_price"=>$totalPrice
-          
-            //               ];
  
 
 redirect("index.php?page=UnsetCart");
  
  
 
-    
+
+}
+
 }else{
+   // client is not exist
+  require_once "../function.php";
   redirect("index.php?page=accountLogin");
-
 }
 
+
+
+
+
+
+
+}else{
+  // method !=post
+  require_once "../function.php";
+  redirect("index.php?page=checkout");
 }
+
+
+    
+ 
+ 

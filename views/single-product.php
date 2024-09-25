@@ -240,10 +240,11 @@ $idItem=$item['id'];
           </div>
           <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
             <span class="product__price product__price--old">
-              <?= $product['price'] ?> جنيه
+            <?php $product['discount_price'] ?   print_r($product['price']) :   0  ?>
             </span>
             <span class="product__price">
-              <?= $product['discount_price'] ?> جنيه
+            <?php $product['discount_price'] ?   print_r($product['discount_price']) :   print_r($product['price']) ?>
+            جنيه
             </span>
           </div>
         </div>
@@ -288,11 +289,13 @@ $idItem=$item['id'];
             <?= $product['author'] ?>
           </div>
           <div class="product__price text-center d-flex gap-2 justify-content-center flex-wrap">
-            <span class="product__price product__price--old">
-              <?= $product['price'] ?> جنيه
+
+         <span class="product__price product__price--old">
+         <?php $product['discount_price'] ?   print_r($product['price']) :   0  ?>
+         جنيه
             </span>
             <span class="product__price">
-              <?= $product['discount_price'] ?> جنيه
+            <?php $product['discount_price'] ?   print_r($product['discount_price']) :   print_r($product['price']) ?>
             </span>
           </div>
         </div>

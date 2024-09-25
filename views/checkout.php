@@ -5,7 +5,8 @@
  
 
 <?php 
-if(isset($_SESSION['cart']['price'])==0 && isset($_SESSION['client'])==0):?>
+ 
+if(empty($_SESSION['cart']) ):?>
 <?php  require_once "function.php";
 redirect("index.php?page=home")
 //  exit(); // تأكد من إنهاء التنفيذ بعد إعادة التوجيه ?>
@@ -137,16 +138,16 @@ redirect("index.php?page=home")
     <span class="product__price"> <?php  $single_Dis  =$product['discount_price']  *  $item['qty'];
                                         
                                         $_SESSION['singleDis']=$single_Dis;
-                                        
-                                        echo $single_Dis
+                                        // price After discount = $single_Dis  ;
+                                        echo $single_Dis  
     ?>   جنيه</span> *  
      <span class="product__price"> <?= $product['discount_price'] . "X". $item['qty'] ?>   جنيه</span> *  
 
 <?php else: ?>
-      <span class="product__price">  <?php $single_Price=$product['price']  *  $item['qty']; 
+      <span class="product__price">  <?php   $single_Price =$product['price']  *  $item['qty']; 
       
-                                        $_SESSION['singlePrice']=$single_Price;
-                                        
+                                        $_SESSION['singlePrice'] = $single_Price;
+                                        // price without discount
                                         echo $single_Price?>  جنيه </span> * 
 
       <span class="product__price">  <?= $product['price'] . "X". $item['qty'] ?>  جنيه </span> * 
@@ -159,7 +160,21 @@ redirect("index.php?page=home")
             <th>قمت بتوفير</th>
             <td class="fw-bolder"> 
             <?php if(isset($product['discount_price'])): ?>
- <span class="product__price"> <?= $product['price'] - $product['discount_price']    ?>   جنيه</span> *  
+
+ <span class="product__price"> 
+   <?php 
+ # price without discount  
+   $totalBeforeDiscount=$product['price'] * $_SESSION['cart'][$id]['qty'] ;
+
+ $totalPriceWithDiscount=  $product['discount_price'] ? $product['discount_price'] * $_SESSION['cart'][$id]['qty'] : "0";
+//  price with discount 
+  echo  $totalBeforeDiscount- $totalPriceWithDiscount;
+  
+  ?>   جنيه</span> 
+
+ <span class="product__price"> <?php 
+ 
+ ?>   جنيه</span> *  
 
  <?php else: ?>
   <span class="product__price">  <?php echo 0 ?>  جنيه </span> * 
@@ -179,10 +194,9 @@ redirect("index.php?page=home")
 <?php endforeach ?>
 
 <?php (  $totalPrice =calculateTotalPriceA($cart))?>
-<?php  $totalPriceP =calculateTotalPriceP($cart)?>
-            <!--endforeach from cartUser  -->
+             <!--endforeach from cartUser  -->
+             <?php    ;  ?> 
          <?php    $_SESSION['totalP']=$totalPrice;  ?> 
-         <?php    $_SESSION['totalBeforDis']=$totalPriceP;  ?> 
 
 
          <tr>
