@@ -1,4 +1,4 @@
 <?php
 return [
-    "base_url" => "http://localhost/adminbookstore/"
+    "base_url" => "http://localhost/bookStore/adminbookstore/"
 ];
